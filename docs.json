@@ -40,7 +40,8 @@
               "academics/curriculum",
               "academics/ap-courses",
               "academics/daily-schedule",
-              "academics/account-access.mdx"
+              "academics/account-access",
+              "academics/learning-support"
             ]
           },
           {
@@ -57,7 +58,7 @@
               "student-life/daily-experience",
               "student-life/socialization",
               "student-life/schedule-flexibility",
-              "student-life/attendance-policy.mdx"
+              "student-life/attendance-policy"
             ]
           },
           {
@@ -66,7 +67,8 @@
               "funding/tefa-voucher",
               "funding/self-pay",
               "funding/faq",
-              "funding/tefa-documents.mdx"
+              "funding/tefa-documents",
+              "funding/tefa-eligibility"
             ]
           },
           {
@@ -75,7 +77,7 @@
               "faq/general",
               "faq/accreditation",
               "faq/troubleshooting",
-              "faq/more-questions.mdx"
+              "faq/more-questions"
             ]
           }
         ]
