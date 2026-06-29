@@ -71,7 +71,8 @@
             "pages": [
               "faq/general",
               "faq/accreditation",
-              "faq/troubleshooting"
+              "faq/troubleshooting",
+              "faq/more-questions.mdx"
             ]
           }
         ]
