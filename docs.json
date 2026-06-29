@@ -63,7 +63,8 @@
             "pages": [
               "funding/tefa-voucher",
               "funding/self-pay",
-              "funding/faq"
+              "funding/faq",
+              "funding/tefa-eligibility.mdx"
             ]
           },
           {
