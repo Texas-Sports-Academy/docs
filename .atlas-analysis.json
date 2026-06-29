@@ -1,0 +1,96 @@
+{
+  "projectType": "saas",
+  "projectName": "Texas Sports Academy Online",
+  "projectDescription": "A Cognia-accredited virtual private school for student-athletes in grades 3–12, combining 2-hour personalized academics with sports training at partner facilities across Texas.",
+  "theme": "almond",
+  "primaryColor": "#ef7025",
+  "lightColor": "#eec9bc",
+  "darkColor": "#4fa1ab",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Guide",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "introduction",
+              "how-it-works",
+              "enrollment",
+              "tuition"
+            ]
+          },
+          {
+            "group": "Academics",
+            "pages": [
+              "academics/2-hour-learning",
+              "academics/curriculum",
+              "academics/ap-courses",
+              "academics/daily-schedule"
+            ]
+          },
+          {
+            "group": "Athletics",
+            "pages": [
+              "athletics/sports-training",
+              "athletics/partner-facilities",
+              "athletics/competitive-advantage"
+            ]
+          },
+          {
+            "group": "Student Life",
+            "pages": [
+              "student-life/daily-experience",
+              "student-life/socialization",
+              "student-life/schedule-flexibility"
+            ]
+          },
+          {
+            "group": "Funding",
+            "pages": [
+              "funding/tefa-voucher",
+              "funding/self-pay",
+              "funding/faq"
+            ]
+          },
+          {
+            "group": "FAQ",
+            "pages": [
+              "faq/general",
+              "faq/accreditation",
+              "faq/troubleshooting"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "2 Hour Learning personalized academic model — mastery-based, self-paced",
+    "Sports training at partner facilities included in tuition",
+    "Apple MacBook provided to every enrolled student",
+    "1:1 on-demand human tutoring via video call",
+    "Live Guide sessions (Zoom) Monday–Friday with multiple start times",
+    "NIL life skills curriculum (public speaking, financial literacy, grit)",
+    "Full AP course catalog (Calculus, Biology, Chemistry, English, History, CS, and more)",
+    "Daily parent dashboard for progress monitoring",
+    "College recruiting support",
+    "Cognia-accredited virtual private school (grades 3–12)",
+    "Waste Meter real-time engagement coaching in the learning software",
+    "No homework — all learning completed in the daily 2-hour session"
+  ],
+  "publicApiSurface": [
+    "School application portal: https://online.sportsacademy.school/apply",
+    "Community & onboarding hub: https://sportsacademy.school/home/start",
+    "Enrollment checklist: https://sportsacademy.school/home/enrollment/checklist",
+    "Partner facilities directory: https://sportsacademy.school/facilities",
+    "Community events page: https://sportsacademy.school/home/events",
+    "Enrollment paperwork: https://sportsacademy.school/online/paperwork",
+    "Laptop shipping address: https://sportsacademy.school/home/laptop",
+    "TEFA/Odyssey parent portal: https://withodyssey.com/en/texas-esa/dashboard",
+    "Voucher application guide: https://sportsacademy.school/voucher-application-guide",
+    "Parent support email: online@texassportsacademy.com",
+    "Live webinars: https://sportsacademy.school/home/events",
+    "30-minute 1:1 call booking: https://calendly.com/d/cvkj-nyf-8w6/30-minute-call-with-texas-sports-academy-online"
+  ]
+}

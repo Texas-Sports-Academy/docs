@@ -1,72 +1,84 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
-  "name": "Mintlify Starter Kit",
+  "theme": "almond",
+  "name": "Texas Sports Academy Online",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#ef7025",
+    "light": "#eec9bc",
+    "dark": "#4fa1ab"
   },
   "favicon": "/favicon.svg",
-  "navigation": {
-    "pages": [
-      {
-        "group": "Getting Started",
-        "pages": [
-          "index",
-          "quickstart"
-        ]
-      }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
-  },
   "logo": {
     "light": "/logo/light.svg",
     "dark": "/logo/dark.svg"
   },
   "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
-      }
-    ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.mintlify.com"
+      "label": "Apply Now",
+      "href": "https://online.sportsacademy.school/apply"
     }
   },
-  "contextual": {
-    "options": [
-      "copy",
-      "view",
-      "chatgpt",
-      "claude",
-      "perplexity",
-      "mcp",
-      "cursor",
-      "vscode"
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Guide",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "introduction",
+              "how-it-works",
+              "enrollment",
+              "tuition"
+            ]
+          },
+          {
+            "group": "Academics",
+            "pages": [
+              "academics/2-hour-learning",
+              "academics/curriculum",
+              "academics/ap-courses",
+              "academics/daily-schedule"
+            ]
+          },
+          {
+            "group": "Athletics",
+            "pages": [
+              "athletics/sports-training",
+              "athletics/partner-facilities",
+              "athletics/competitive-advantage"
+            ]
+          },
+          {
+            "group": "Student Life",
+            "pages": [
+              "student-life/daily-experience",
+              "student-life/socialization",
+              "student-life/schedule-flexibility"
+            ]
+          },
+          {
+            "group": "Funding",
+            "pages": [
+              "funding/tefa-voucher",
+              "funding/self-pay",
+              "funding/faq"
+            ]
+          },
+          {
+            "group": "FAQ",
+            "pages": [
+              "faq/general",
+              "faq/accreditation",
+              "faq/troubleshooting"
+            ]
+          }
+        ]
+      }
     ]
   },
   "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
-    }
+    "socials": {}
   }
 }
