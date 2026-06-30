@@ -1,0 +1,40 @@
+---
+title: "Enrollment communications"
+sidebarTitle: "Communications"
+description: "The outreach and onboarding messages we send (and plan to send) during enrollment."
+---
+
+## General
+
+<Note>
+  Today these messages are sent manually as one-off batches. The goal is to automate the full sequence below — treat anything marked **planned** as a target, not current behavior.
+</Note>
+
+There are two communication tracks: **pre-start readiness reminders** (get the family ready before their date) and **onboarding** (welcome them once enrolled).
+
+### Pre-start readiness reminders
+
+As a start date approaches, we make sure each family in that cohort is ready to roster and receive a laptop. The planned sequence:
+
+1. **~10 days before start (planned).** An SMS to the next cohort's parents: "We're ready to have you start on this date — head to your portal to fill in anything missing and confirm your laptop shipping address." It covers, in one message and on one page, both (a) any information that would block SIS rostering and (b) laptop delivery-address confirmation. (Whether this reuses the laptop confirm-your-address page or a new URL is still undecided.)
+2. **~8 days before start (planned, tentative).** The same reminder again, if the family still hasn't confirmed.
+3. **When the laptop ships (planned).** "Your laptop is on the way — track it here," linking to the tracker.
+
+Today, the only piece of this that exists is the pre-ship laptop address reconfirmation (a manual SMS batch — see [Laptops](/operations/enrollment/laptops)). The 10-day and 8-day readiness reminders are not built yet.
+
+### Onboarding
+
+Once a parent is enrolled in Timeback, we welcome the family. The plan is a **single message (likely email)** that combines what are currently separate pieces:
+
+- The parent's sign-in instructions.
+- The student's sign-in instructions.
+- The link to the onboarding portal.
+
+This one is actively being worked on. Today, a parent dashboard sign-in email and an onboarding setup-guide email are sent separately, and there is no student sign-in email yet.
+
+## Developer notes
+
+- **SMS** goes through SalesMessage. Both the pre-ship laptop reconfirmation and the planned readiness reminders are/will be sent here. The reminders currently exist only as manual, one-off batches — there's no scheduled job, and the laptop batch has its actual sends disabled in the script.
+- **Email** uses two providers today: the parent dashboard sign-in email is sent after Timeback verification by `verify-timeback-and-notify` via a **Zapier** webhook; the onboarding setup-guide email is sent via **Amazon SES** (`email-campaigns/onboarding-sender`). Resend **is** used elsewhere in the repo for other transactional emails — that's just not the path for these two. The planned combined onboarding message would consolidate these.
+
+Detailed copy for each message will be filled in as it's finalized; if the per-message detail grows, this page can split into subpages (Mintlify supports nested navigation groups).

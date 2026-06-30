@@ -1,0 +1,37 @@
+---
+title: "Readiness and rostering"
+sidebarTitle: "Readiness & Rostering"
+description: "How we clear enrollment blockers and roster students into the SIS and Timeback."
+---
+
+## General
+
+Once a family has a start date and confirmed payment, they're eligible to start — but eligibility is not the same as being ready to enroll. Before we can roster a student or ship a laptop, we have to clear any blockers:
+
+- **Missing information the SIS needs** — student first and last name, date of birth, grade, and the parent's email.
+- **An unconfirmed laptop delivery address.**
+
+We reach out to the family — ideally in one message — and ask them to fill in whatever's missing by a cutoff before their start date. If they don't respond in time, the family is moved to the next start date.
+
+Once a student is ready, the rest happens automatically around a week before their start date: they're rostered in the SIS, which enrolls them in Timeback. We then verify the Timeback account exists, link the parent, and send the parent their dashboard sign-in email.
+
+## Developer notes
+
+### Readiness vs. data completeness
+
+These are two separate checks:
+
+- **Roster readiness** (`evaluateRosterReadiness` in `server/src/lib/enrollment/roster-readiness.ts`) decides whether a student is in the window to be enrolled: they need real commitment, a concrete start date, a confirmed laptop address, and an open roster window (about 7 days before start).
+- **Data completeness** is checked later, at roster time, inside `auto-enroll`. A missing parent email or missing student name / date of birth / grade holds the student in `paid_not_enrolled` so the next cron run can retry. Parent email is the only required parent field; other parent details are sent if present but don't block.
+
+### The roster pipeline
+
+- `promote-paid-not-enrolled-students` (daily cron) normalizes every committed student into `paid_not_enrolled`, then re-fires a roster event for those whose window is open. It does not enroll anyone itself.
+- `auto-enroll` (one run per student, also triggered directly when payment is confirmed) rosters the student into the SIS and, **only on success**, flips them to `enrolled`. It then cascades the application to `enrolled` once all siblings are done and kicks off the Klair enrollment sync and an XP event. It's idempotent — re-runs won't double-roster.
+- `verify-timeback-and-notify` (cron, every few hours in production) confirms the student and parent exist in Timeback/OneRoster, links them, saves the OneRoster IDs, and sends one dashboard email per family. Timeback provisions the student account roughly hourly and the parent link roughly daily, which is why this runs on its own schedule rather than inline.
+
+<Note>
+  The dashboard email is family-level — siblings in the same household get one email, not one per student. The send is claimed atomically so concurrent runs can't double-send.
+</Note>
+
+`enrolled` is a SIS-success status, not a date-based one — it always implies the student was actually rostered.

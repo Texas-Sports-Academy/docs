@@ -90,6 +90,18 @@
             ]
           },
           {
+            "group": "Enrollment Operations",
+            "pages": [
+              "operations/enrollment/overview",
+              "operations/enrollment/start-dates",
+              "operations/enrollment/payments",
+              "operations/enrollment/readiness-and-rostering",
+              "operations/enrollment/laptops",
+              "operations/enrollment/communications",
+              "operations/enrollment/data-model-notes"
+            ]
+          },
+          {
             "group": "Funding",
             "pages": [
               "funding/tefa-voucher",

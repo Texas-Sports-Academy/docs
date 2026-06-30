@@ -1,0 +1,53 @@
+---
+title: "Odyssey sync"
+sidebarTitle: "Odyssey Sync"
+description: "How Odyssey voucher data is imported, interpreted, and mapped into enrollment operations."
+---
+
+## General
+
+Odyssey is the external portal for TEFA voucher families. Families use Odyssey to select Texas Sports Academy and confirm tuition.
+
+TSA pulls Odyssey data into a CSV and syncs it into the backend. That sync is how the enrollment system learns which voucher families have confirmed Odyssey status.
+
+Odyssey confirmation is part of the payment-readiness picture, but it is **not** payment — it only sets voucher/Odyssey fields. It does not set `paid_at`, mark a student `enrolled`, or roster anyone (see `_planning/db_consistency.md`).
+
+## Developer notes
+
+The Odyssey CSV includes external fields that need to be interpreted carefully.
+
+| Odyssey concept | Internal note |
+| --- | --- |
+| `Student ID` | Odyssey/TEFA student UUID. Distinct from `student_leads.id`; now also persisted locally as `student_leads.odyssey_student_id` (unique). |
+| `Enrollment Status` | Odyssey approval signal, ∈ {`Verified`, `Pending`}. `Verified` = approved/eligible. The approval gate is `ODYSSEY_APPROVED_STATUS = "verified"`. |
+| `Row Status` | Composite raw Odyssey state that maps into internal `odyssey_status` via `mapRowStatusToLevel`. |
+| `odyssey_status` | Internal status used by readiness and roster gates. |
+
+`odyssey_status` is a plain `text` column (not a DB enum) on both `family_leads` and `student_leads`. Its values, plus the `Row Status` mapping (`mapRowStatusToLevel` / `_planning/db_consistency.md`), are:
+
+| `odyssey_status` | From `Row Status` |
+| --- | --- |
+| `confirmed` | `Enrollment/Tuition/Fees Confirmed … Student Approved` |
+| `awaiting_confirmation` | `Enrollment/Tuition/Fees Awaiting Confirmation … Student Approved` |
+| `tuition_needed` | `Enrollment/Tuition/Fees Needed … Student Approved` |
+| `verification_pending` | `Enrollment Verification Pending …` |
+| `null` | Student is absent from the latest report or not yet backfilled (not an enum value). |
+
+### Operational process
+
+1. Palmer downloads a CSV from the Odyssey portal (canonical filename pattern `tefa-enrollment-fees-YYYY-MM-DD.csv`; exports live in `_planning/admissions/tefa_lists/`).
+2. Palmer runs the read-only match/inconsistency pass: `cd server && bun run scripts/odyssey-student-map/build-odyssey-student-map.ts [path-to-sheet.csv]`. This flags `family_conflict`, `multiple_candidates`, `name_variant`, `dob_mismatch`, `phone_override`, etc. into `_planning/add_student_odyssey_id/student-map.csv` + `summary.md`. It never writes the database. The match is by normalized phone number, not by Student ID.
+3. Palmer runs the backfill, which updates the correct TSA backend row from the CSV. It is dry-run by default; `--commit` applies.
+
+<Warning>
+  The canonical, override-complete backfill is `_planning/admissions/backfill-odyssey-selected.ts`. The copy under `server/scripts/` is **stale** (missing ~25 phone overrides) per `_planning/add_student_odyssey_id/plan.md` — verify which copy you are running before committing.
+</Warning>
+
+The backfill currently writes the **family-level** `family_leads.odyssey_status`, derived from the **least-confirmed** `Row Status` across the family's CSV students (so a family is `confirmed` only when all its CSV students are). Writing the **student-level** `student_leads.odyssey_status` is a documented TODO in `_planning/db_consistency.md`; the column exists and readiness already prefers the student-level value with family-level fallback, but the writer has not landed in the canonical script.
+
+Occasionally the match process creates duplicate rows or fails to find the correct existing row. The concrete failure mode: when sheet spelling/phone differs from the DB, the backfill creates a duplicate `status = lead` student row alongside the real `applied` row (on 2026-06-11 this produced 8 fresh duplicates). See [Data model notes](/operations/enrollment/data-model-notes) for the related consistency warnings.
+
+## Known gaps
+
+- The student-level `odyssey_status` writer is still a TODO in the canonical backfill.
+- A sample status mapping from a fresh export should be added after confirming the latest columns.
