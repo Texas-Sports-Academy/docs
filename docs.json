@@ -41,7 +41,34 @@
               "academics/ap-courses",
               "academics/daily-schedule",
               "academics/account-access",
-              "academics/learning-support"
+              "academics/learning-support",
+              {
+                "group": "Learning Apps",
+                "pages": [
+                  "overview",
+                  "learning-apps/mentava-basics.mdx",
+                  "learning-apps/alpha-reading-fluency.mdx",
+                  "learning-apps/anton.mdx",
+                  "learning-apps/mobymax.mdx",
+                  "learning-apps/alpharead.mdx",
+                  "learning-apps/lalilo.mdx",
+                  "learning-apps/freckle.mdx",
+                  "learning-apps/egumpp.mdx",
+                  "learning-apps/ap-language-literature.mdx",
+                  "learning-apps/happy-numbers.mdx",
+                  "learning-apps/zearn.mdx",
+                  "learning-apps/alphamath.mdx",
+                  "learning-apps/math-academy.mdx",
+                  "learning-apps/edia.mdx",
+                  "learning-apps/alphawrite.mdx",
+                  "learning-apps/nice-academy.mdx",
+                  "learning-apps/edmentum-hs-biology.mdx",
+                  "learning-apps/vocabloco.mdx",
+                  "learning-apps/membean.mdx",
+                  "learning-apps/alpha-numbers.mdx",
+                  "learning-apps/math-raiders.mdx"
+                ]
+              }
             ]
           },
           {
@@ -80,6 +107,14 @@
               "faq/more-questions"
             ]
           }
+        ]
+      },
+      {
+        "tab": "Partner Facility Onboarding",
+        "pages": [
+          "main",
+          "payment",
+          "call-script"
         ]
       }
     ]
