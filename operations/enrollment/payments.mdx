@@ -10,18 +10,13 @@ To be eligible to start, a family needs confirmed payment. There are two ways a 
 
 ### Voucher (TEFA) families
 
-Voucher families confirm through Odyssey, an external state portal that holds their voucher information. The steps are:
+Voucher families confirm tuition through Odyssey, an external state portal that holds their voucher information — they select Texas Sports Academy, we enter the tuition, and they confirm it to release the funds. See [TEFA Voucher](/funding/tefa-voucher) for the full family-facing process.
 
-1. The voucher information lives in Odyssey.
-2. The parents select Texas Sports Academy as their school.
-3. A tuition is created for them.
-4. They approve the tuition, which sets their Odyssey status to something like *confirmed* — signalling that everything on the Odyssey side is ready.
-
-That Odyssey data then has to make it into our system. Palmer runs a backfill script (informally *Backfill Odyssey Selected*) that takes the latest Odyssey export, matches each row to the family and students we already have, and updates our database so it reflects the voucher portal. For a voucher family, this confirmation **is** their payment being confirmed — there's no separate charge on our side.
+On our side, that Odyssey data has to make it into our system. Palmer runs a backfill script (informally *Backfill Odyssey Selected*) that takes the latest Odyssey export, matches each row to the family and students we already have, and updates our database so it reflects the voucher portal. For a voucher family, this Odyssey confirmation **is** their payment being confirmed — there's no separate charge on our side.
 
 ### Self-pay families
 
-Self-pay families pay through our portal. Paying records a payment type (their plan) and a paid date, and that's their confirmation. If financial aid, discounts, or a voucher fully cover a self-pay family's tuition, they confirm a $0 balance in the portal instead of paying.
+Self-pay families pay through our portal. Paying records a payment type (their plan) and a paid date, and that's their confirmation. If financial aid, discounts, or a voucher fully cover a self-pay family's tuition, they confirm a $0 balance in the portal instead of paying. For tuition amounts, payment plans, and what's included, see [Self-Pay](/funding/self-pay).
 
 Confirmed payment matters because it controls operational readiness — it's what lets a student count toward a start date's capacity and move toward rostering.
 
