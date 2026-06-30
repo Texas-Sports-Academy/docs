@@ -114,7 +114,8 @@
         "pages": [
           "main",
           "payment",
-          "call-script"
+          "call-script",
+          "process"
         ]
       }
     ]

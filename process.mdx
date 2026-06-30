@@ -1,0 +1,190 @@
+---
+title: "Process"
+---
+
+Last updated : June 30, 2026 
+
+## **Who's involved**
+
+- **Texas Sports Academy admin (us)** — finds the facility, fills in their info, and sends the invite.
+- **The facility manager / owner** — the person at the facility who receives the invite and runs their portal.
+- **The Facility Portal** — the facility's private dashboard where they manage everything.
+
+---
+
+## **Step 1 — Find the facility in the admin dashboard**
+
+Go to the **Facilities** admin page: `/admin/facilities`.
+
+This is the master list of every facility in our system. Facilities get here a few different ways:
+
+- **Families requested them** on the community map (parents "vote" for places they'd like to see partner with us).
+- **A partner reached out** and applied to work with us.
+- **We added them manually** using the **Add Facility** button.
+
+Find the facility you want to onboard (use the search box), and click the row to expand its full details.
+
+<Frame>
+  ![Image](/images/image-2.png)
+</Frame>
+
+---
+
+## **Step 2 — Fill in the facility's details**
+
+Inside the expanded row, make sure the key info is filled in and correct. The two things that matter most for onboarding:
+
+- **Owner email** — this is the address the invite gets sent to. **No email = no invite.** This is the single most common reason an invite can't be sent.
+- **Status** — set the facility to **Partnered** once they've agreed to work with us. (This also enables the "automatic sign-in" shortcut described in Step 5.)
+
+Other useful fields to complete while you're here: owner name, owner phone, address, and the sports they offer. The cleaner this info, the smoother the rest of the process.
+
+<Frame>
+  ![Image](/images/image-3.png)
+</Frame>
+
+---
+
+## **Step 3 — Send the manager invite**
+
+In the facility's details, find the **Facility Manager** panel. You'll see one of three states:
+
+- **Not invited yet** → a blue **Send manager invite** button.
+- **Invite already sent** → **Resend invite** and **Cancel invite** buttons.
+- **Already claimed** → shows who claimed it and when, plus an **Unclaim** button.
+
+Click **Send manager invite**. Behind the scenes this emails the facility's owner a personalized link to get started. You'll see a confirmation like _"Invite sent to **[owner@example.com](mailto:owner@example.com)**."_
+
+**Alternative: Copy link.** If their email is unreliable (some company inboxes silently block outside mail), use the **Copy link** button instead. This gives you the exact same setup link, which you can paste into a text message, WhatsApp, or wherever you're already talking to them. It works identically to the emailed link.
+
+<Frame>
+  ![Image](/images/image-1.png)
+</Frame>
+
+---
+
+## **Step 4 — What the facility receives**
+
+The owner gets a clean, branded email titled:
+
+> **Manage \[Facility Name\] on Texas Sports Academy**
+
+It explains that Texas Sports Academy has invited them to manage their facility, that they'll be able to see the trainers and student-athletes connected to their facility and submit monthly invoices, and it has one big button:
+
+> **Claim \[Facility Name\]**
+
+The email also reminds them of two important things:
+
+- The button is a **one-time setup link** — once they finish, it won't work again. To come back later, they sign in at their portal.
+- They should always sign in using **the same method they set up with** (email & password, Google, or phone number). Switching methods later creates a separate, empty account.
+
+If they have questions, they can simply reply to the email and it reaches our partnerships team.
+
+<Frame>
+  ![Image](/images/image-4.png)
+</Frame>
+
+---
+
+## **Step 5 — They create their account and "claim" the facility**
+
+When the owner clicks the button:
+
+1. They're taken to a sign-up screen with their email **already filled in**, so they just set a password (or use Google / phone).
+2. After signing in, their account is automatically connected to their facility, and they're dropped into their **Facility Portal**.
+3. They'll briefly see an "Accepting your invite…" screen, then **"You're in"**, and they land on their dashboard.
+
+**The even-easier shortcut (auto sign-in):** If the facility is marked **Partnered** and their email/phone matches what we have on file, they don't even strictly need the invite link. If they just sign in at the portal (`/facility`) with that matching email or phone, the system recognizes them and connects them to their facility automatically. The emailed link is the reliable backup, but many owners can simply log in.
+
+<Frame>
+  ![Image](/images/image-5.png)
+</Frame>
+
+---
+
+## **Step 6 — Welcome to the Facility Portal**
+
+The facility's home base is `/facility`. The first thing they see is a friendly welcome and a **"Finish setting up your facility"** checklist with a progress bar. There are **four steps**, and the portal highlights whichever one is next:
+
+1. **Review onboarding documents** — opens the partner kit (`/facility/onboarding`): the partnership agreement/SOP, marketing flyers and posters, ready-to-use copy (emails, social posts, talking points), and brand logos to download. This is everything they need to start promoting the partnership.
+2. **Connect your bank account** — links their bank through **Stripe** so invoice payments deposit directly to them. (More on this below.)
+3. **Set up your schedule** — they tell families when the facility is open and what's offered each day (`/facility/schedule`).
+4. **Set up your amenities** — they list what the facility offers so families know what to expect (`/facility/amenities`).
+
+As they finish each step, it checks off and the progress bar fills up. When all four are done, they see **"You're all set."**
+
+<Frame>
+  ![Image](/images/image-6.png)
+</Frame>
+
+---
+
+## **Step 7 — Their roster fills in automatically**
+
+On the dashboard, the facility sees three live tiles under **"Your roster"**:
+
+- **Trainers** — coaches connected to their facility (`/facility/trainers`).
+- **Students** — student-athletes whose families chose this facility during sign-up (`/facility/students`).
+- **Invoices** — how many invoices are submitted and awaiting our review (`/facility/invoices`).
+
+The important thing to tell partners: **they don't have to manually build this.** As families pick their facility during onboarding, and as trainers get connected, these lists populate on their own.
+
+<Frame>
+  ![Image](/images/image-7.png)
+</Frame>
+
+---
+
+## **Step 8 — Getting paid (the monthly invoice loop)**
+
+This is the part facilities care most about, and it's intentionally simple.
+
+**What the facility does each month:**
+
+1. Go to **Invoices** → **New invoice** (`/facility/invoices/new`).
+2. Pick the month.
+3. Select the students who attended their facility that month.
+4. The rate defaults to **\$200 per student** (adjustable to match their agreement); the total is calculated automatically.
+5. Add a short note and submit.
+
+**What happens after they submit:**
+
+- The invoice shows as **Submitted** and lands in our admin review queue.
+- An admin reviews it and marks it **Approved**.
+- When it's paid, it's marked **Paid**, and if their bank is connected through Stripe, the money is **transferred directly to them**.
+
+So the status flow is simply: **Submitted → Approved → Paid.** (If something's off, an admin can reject it with a reason, and the facility can fix and resubmit for that month.)
+
+<Frame>
+  ![Image](/images/image-8.png)
+</Frame>
+
+---
+
+## **Admin tools you'll use after the invite**
+
+All of these live in the same **Facility Manager** panel on `/admin/facilities`:
+
+- **Resend invite** — sends the same setup link again (e.g. they lost the email). Their original link still works too.
+- **Cancel invite** — cancels a pending invite, for example if you sent it to the wrong email.
+- **Copy link** — grabs the setup link to share by text/WhatsApp instead of email.
+- **Unclaim** — disconnects the current manager (e.g. the wrong person claimed it, or the contact changed). After unclaiming, you can send a fresh invite to the right person.
+
+<Frame>
+  ![Image](/images/image-9.png)
+</Frame>
+
+<Frame>
+  ![Image](/images/image-10.png)
+</Frame>
+
+---
+
+## **Quick troubleshooting / FAQ**
+
+- **"Send manager invite" is greyed out.** The facility is missing an **owner email**. Add one in their details first, or use **Copy link** to share it directly.
+- **The owner says the link doesn't work.** It's a one-time link — if they already finished setup, they just need to **sign in** at `/facility` instead. If they truly haven't claimed it, use **Resend invite**.
+- **"This invite has already been claimed by another account."** Someone else used the link. Use **Unclaim**, confirm the correct contact, then send a new invite.
+- **The owner's email keeps bouncing/blocking.** Use **Copy link** and send it through a channel they actually check.
+- **They claimed it but the portal says "not linked yet."** Rare — it means their account has access but isn't tied to a facility. Re-send the invite, or unclaim and re-invite. If it persists, flag it to the team.
+- **Which sign-in method should they use?** Always the same one they started with (email/password, Google, or phone). Mixing methods creates a second, empty account.
