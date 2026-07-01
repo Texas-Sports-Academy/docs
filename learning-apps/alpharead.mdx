@@ -1,5 +1,8 @@
 ---
-title: "alpharead"
+title: "alpharead.mdx"
+sidebarTitle: "AlphaRead"
+description: "What AlphaRead is, how its per-article XP works, and the concerns most often raised about it."
+icon: "book-open"
 ---
 
 ## Subjects & Grades
@@ -17,3 +20,130 @@ title: "alpharead"
 - 80% on articles
 - ≥75% of target reading fluency for the recording XP
 - 75% on the comprehension quiz
+
+<Note>
+  **Scope of this page.** This is the AlphaRead entry in the app support library. It covers **what it is**, its **XP rules**, and the **top concerns** — each with resolution steps, a "verify resolved" check, and a ready-to-paste canned response. For the shared playbook framework, severity levels, and the "No XP" triage tree, see the [TimeBack page](/learning-apps/timeback-mdx).
+
+  **Owner:** \[Add owner\] · **Last reviewed:** 2026-07-01
+</Note>
+
+## What is AlphaRead?
+
+AlphaRead is TSA's **core reading app**, used across **grades 3–12**. Students read **articles** and answer **comprehension questions**, earning XP for each article they complete accurately.
+
+<CardGroup cols={2}>
+  <Card title="Reading comprehension" icon="book-open">
+    Students read articles and answer questions that build reading comprehension.
+  </Card>
+
+  <Card title="Per-article XP" icon="newspaper">
+    Each article has its own XP value, shown in TimeBack, earned by passing its comprehension.
+  </Card>
+</CardGroup>
+
+## Purpose
+
+- Build **reading comprehension** for grades 3–12 through leveled articles.
+- Reward **accurate comprehension**, not just time reading.
+- Report to TimeBack **natively** (first-party); XP posts in **under a minute**.
+
+<Info>
+  AlphaRead is a **first-party app** — it is **not** in the third-party [Bridge](/learning-apps/timeback-mdx). XP is earned **per article** when its comprehension is completed at **≥80% accuracy** — reading time alone doesn't post XP. See the [XP quick reference](#xp-quick-reference).
+</Info>
+
+## XP quick reference
+
+Grounded in TimeBack's per-app XP rules.
+
+| App | Accuracy needed | Typical delay | Notes |
+| --- | --- | --- | --- |
+| AlphaRead | 80% | \< 1 min | Reading (G3–12); **XP shown per article** in TimeBack; earned by completing the article's comprehension at ≥80% |
+
+<Info>
+  XP is **per article** and posts when the comprehension is completed at **≥80% accuracy**. Reading an article without completing its questions at 80%\+ won't post XP, and different articles are worth different amounts. _(Source: TimeBack XP rules.)_
+</Info>
+
+## Top concerns
+
+Ranked by support impact. Each is tagged **User education** (resolved by explanation/procedure) or **Product defect** (needs a product-side fix).
+
+| # | Concern | Type | Impact |
+| --- | --- | --- | --- |
+| 1 | No XP for reading time (comprehension below 80% or not completed) | User education | Medium |
+| 2 | XP varies from article to article | User education | Low–Medium |
+
+---
+
+### 1. No XP for reading time
+
+- **Type:** User education
+- **Applications:** AlphaRead _(reading app; app attribution to confirm on the ticket below)_
+- **Symptom / verbatim:** Nonthapat / Napatt — reported **reading time completed with no XP awarded**. _(Confirm this was AlphaRead vs. another reading app.)_
+- **Root cause:** AlphaRead awards XP **per article, when its comprehension is completed at ≥80% accuracy** — **reading time alone doesn't earn XP**, and a comprehension below 80% earns none.
+
+**Resolution steps**
+
+<Steps>
+  <Step title="Confirm the comprehension was completed">
+    Check whether the student finished the article's **questions**, not just read the article.
+  </Step>
+  <Step title="Check the accuracy">
+    The comprehension needs **≥80% accuracy** to award the article's XP.
+  </Step>
+  <Step title="Explain and encourage a retry">
+    Reading time on its own doesn't post XP — completing the questions at 80%\+ does.
+  </Step>
+</Steps>
+
+**Verify resolved:** XP posts when the student completes an article's comprehension at ≥80% accuracy.
+
+**Canned response**
+
+```text
+Hi [Parent name], good news — nothing's broken! AlphaRead awards XP when [Student]
+completes an article's questions at 80% accuracy or higher — reading the article on
+its own (or scoring below 80%) won't post XP. A quick retry aiming for 80%+ on the
+comprehension should do it. Happy to help if the passages are tricky!
+```
+
+**Metadata:** Reported by Nonthapat/Napatt (reading; confirm app) · Severity **Medium**
+
+### 2. XP varies from article to article
+
+- **Type:** User education
+- **Applications:** AlphaRead
+- **Symptom / verbatim:** _Anticipated from AlphaRead's XP rules_ — "some articles earned more XP than others."
+- **Root cause:** XP is set **per article** (and shown in TimeBack), so different articles are worth different amounts — a shorter or easier one earns less than a longer one. This variation is expected.
+
+**Resolution steps**
+
+<Steps>
+  <Step title="Explain per-article XP">
+    Each article has its own XP value, visible in TimeBack — so the amount varies by article.
+  </Step>
+  <Step title="Note length/level">
+    Longer or higher-level articles are generally worth more than shorter ones.
+  </Step>
+  <Step title="Reassure">
+    Earned XP is recorded on the account; the variation is by design.
+  </Step>
+</Steps>
+
+**Verify resolved:** The XP matches the article's stated value in TimeBack.
+
+**Canned response**
+
+```text
+Hi [Parent name], great question! In AlphaRead the XP is set per article — you can
+see each article's value in TimeBack — so different articles are worth different
+amounts, and a shorter or easier one earns less than a longer one. That variation is
+expected. Their earned XP is always saved!
+```
+
+**Metadata:** Grounded in XP rules; watch for tickets · Severity **Low–Medium**
+
+---
+
+<Tip>
+  **Confirm before publishing:** whether the Nonthapat/Napatt "reading, no XP" ticket (#1) was actually AlphaRead, and the per-article XP behavior with an SME.
+</Tip>
