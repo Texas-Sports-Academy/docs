@@ -1,5 +1,7 @@
 ---
-title: "math-raiders"
+title: "Math Raiders"
+sidebarTitle: "Math Raiders"
+description: "What Math Raiders is, how its engagement-based XP works, and the concerns most often raised about it."
 ---
 
 ## Subjects & Grades
@@ -21,3 +23,156 @@ title: "math-raiders"
 ## Accuracy Threshold
 
 - 80% accuracy required
+
+<Note>
+  **Scope of this page.** This is the Math Raiders entry in the app support library. It covers **what it is**, its **XP rules**, and the **top concerns** — each with resolution steps, a "verify resolved" check, and a ready-to-paste canned response. For the shared playbook framework, severity levels, and the "No XP" triage tree, see the [TimeBack page](/learning-apps/timeback-mdx).
+
+  **Owner:** \[Add owner\] · **Last reviewed:** 2026-07-01
+</Note>
+
+## What is Math Raiders?
+
+Math Raiders (built by **Playcademy**) is TSA's **Fast Math** app for **grades 3–8** — a game-based way to build math-fact **fluency and speed**. Students play short **"raids"** (1–2 minute mini-sessions, max ~2.5 min) answering math facts as quickly and accurately as they can.
+
+<CardGroup cols={2}>
+  <Card title="Fluency through raids" icon="gauge-high">
+    Short, fast raids build automatic recall of math facts — speed and accuracy both matter.
+  </Card>
+
+  <Card title="Effort-based XP" icon="bolt">
+    XP rewards **focused, engaged** play — not just time with the app open.
+  </Card>
+</CardGroup>
+
+## Purpose
+
+- Build **math-fact fluency** (fast, accurate recall) for grades 3–8, alongside the core math app.
+- Reward **effort and engagement**, not idle time — XP scales with how focused the play is.
+- Report to TimeBack **natively** (first-party); XP posts in about **30–60 seconds**.
+
+<Info>
+  Math Raiders is a **first-party app** — it is **not** in the third-party [Bridge](/learning-apps/timeback-mdx). Its XP model is unusual: it depends on **accuracy, speed, and engagement per raid**, which is the source of most "why so little XP?" questions. See the [XP quick reference](#xp-quick-reference).
+</Info>
+
+## XP quick reference
+
+Grounded in TimeBack's per-app XP rules.
+
+| App | Accuracy needed | Typical delay | Notes |
+| --- | --- | --- | --- |
+| Math Raiders (Playcademy) | 80% per raid (\+ ≥2 correct/min) | 30–60 sec | First-party Fast Math (G3–8); **1 XP per minute of focused play**, scaled by an engagement multiplier |
+
+<AccordionGroup>
+  <Accordion title="What counts as 'focused' play" icon="crosshairs">
+    A raid earns XP only when it is **focused**: at least **80% accuracy** on that raid **and** a minimum of **2 correct questions per minute**. Below that, the raid doesn't earn its full XP.
+  </Accordion>
+
+  <Accordion title="The engagement multiplier" icon="sliders">
+    XP per raid is scaled against the student's **own best pace** (CQPM — correct questions per minute):
+
+    - **Floor** = 25% of the student's best CQPM (minimum 2).
+    - **0–29% of floor:** 0% XP (treated as AFK / not engaged).
+    - **30–100% of floor:** XP scales linearly (e.g., 75% of floor → 75% XP).
+    - **Above 100% of floor:** capped at 100% XP (no extra credit for going faster than your best).
+  </Accordion>
+</AccordionGroup>
+
+## Top concerns
+
+Ranked by support impact. Each is tagged **User education** (resolved by explanation/procedure) or **Product defect** (needs a product-side fix).
+
+<Info>
+  Your insights data has no _specific_ Math Raiders ticket — it was only a keyword mention. The concerns below are **preventive**, derived from how its XP works, and are the predictable questions to expect. Labeled accordingly.
+</Info>
+
+| # | Concern | Type | Impact |
+| --- | --- | --- | --- |
+| 1 | Time spent in the app but little or no XP | User education | Medium |
+| 2 | XP varies a lot session to session (scales with effort, not minutes) | User education | Medium |
+
+---
+
+### 1. Time spent in the app but little or no XP
+
+- **Type:** User education
+- **Applications:** Math Raiders
+- **Symptom / verbatim:** _Anticipated from Math Raiders' XP rules_ — "my child was in Math Raiders for a while but earned almost no XP."
+- **Root cause:** XP only accrues for **focused** raids — **≥80% accuracy** _and_ **≥2 correct questions/minute**. If the student is idle, distracted, or answering below the engagement **floor** (25% of their best pace), the raid earns **0% XP** (treated as AFK). Time with the app open is not enough on its own.
+
+**Resolution steps**
+
+<Steps>
+  <Step title="Explain XP is effort-based">
+    Math Raiders rewards **focused raids**, not time with the app open — a raid the student wasn't really engaged in can come back with little or no XP.
+  </Step>
+  <Step title="Check the two requirements">
+    A raid earns XP only at **≥80% accuracy** _and_ **≥2 correct questions/minute**. Below the engagement floor it's treated as idle (0 XP).
+  </Step>
+  <Step title="Coach the play pattern">
+    Encourage the student to stay locked in and answer steadily for the full 1–2 minutes of each short raid — that's what posts the XP.
+  </Step>
+  <Step title="Rule out a real gap">
+    If the student was clearly focused and accurate but still shows 0 XP after ~1 minute, note it for a closer look (see the [TimeBack "No XP" triage](/learning-apps/timeback-mdx)).
+  </Step>
+</Steps>
+
+**Verify resolved:** Focused raids post XP within ~30–60 seconds, and the parent understands why idle time earns none.
+
+**Canned response**
+
+```text
+Hi [Parent name], good question! Math Raiders is a little different from the other
+apps — it rewards focused, engaged play rather than just time with the app open. A
+short "raid" earns XP when [Student] is answering accurately (about 80%+) and
+keeping up a steady pace; if it's mostly idle or very slow, that raid can come back
+with little or no XP. The good news is nothing's broken — a few focused raids will
+post XP within a minute or so. Let me know if [Student] was clearly engaged and
+still saw nothing, and I'll take a closer look!
+```
+
+**Metadata:** Grounded in XP rules; watch for tickets · Severity **Medium**
+
+### 2. XP varies a lot session to session
+
+- **Type:** User education
+- **Applications:** Math Raiders
+- **Symptom / verbatim:** _Anticipated from Math Raiders' XP rules_ — "some days \[Student\] earns lots of XP and other days barely any for the same time."
+- **Root cause:** The **engagement multiplier** scales each raid's XP between **30% and 100%** based on the student's pace relative to their **own best** (CQPM). A slower or less-focused session earns proportionally less; going _faster_ than their best doesn't earn extra (capped at 100%). So XP tracks **effort and focus**, not just minutes.
+
+**Resolution steps**
+
+<Steps>
+  <Step title="Explain the multiplier">
+    Each raid's XP scales with the student's pace compared to their **own best** — so a slower or more distracted session earns proportionally less than a locked-in one.
+  </Step>
+  <Step title="Normalize the variation">
+    Day-to-day differences are expected, not a bug. Going _faster_ than their personal best doesn't add extra (it's capped at 100%).
+  </Step>
+  <Step title="Frame it positively">
+    Steady, focused practice earns the most XP and raises their pace over time — which is the whole point of a fluency app.
+  </Step>
+  <Step title="Reassure">
+    Earned XP is recorded on the account; nothing is lost between sessions.
+  </Step>
+</Steps>
+
+**Verify resolved:** The parent understands XP tracks effort/pace, and a session's XP is consistent with how focused it was.
+
+**Canned response**
+
+```text
+Hi [Parent name], great observation! Math Raiders scales XP to how focused and quick
+each raid is compared to [Student]'s own best pace — so a really locked-in session
+earns more than a slower or more distracted one, even for the same amount of time.
+That day-to-day variation is expected, not a glitch (and going faster than their
+personal best doesn't add extra — it's capped). Steady, focused practice earns the
+most and builds their fluency over time. Their earned XP is always saved!
+```
+
+**Metadata:** Grounded in XP rules; watch for tickets · Severity **Medium**
+
+---
+
+<Tip>
+  **Confirm before publishing:** the engagement-multiplier details (floor %, scaling, CQPM) with an SME, and whether any real Math Raiders tickets have since come in to add as observed concerns.
+</Tip>
