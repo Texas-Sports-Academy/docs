@@ -1,0 +1,239 @@
+---
+title: "Placement Tests"
+---
+
+<Note>
+  **Scope of this page.** This is the placement-testing entry in the app support library — the **support concerns and fixes** for placement / MAP testing (delivered through the tool internally called the **Alpha Test Player**). For **how placement works** (the parent-facing workflow), see [Account & Access → placement](/academics/account-access). For the shared playbook framework, severity levels, and the "No XP" triage tree, see the [TimeBack page](/learning-apps/timeback-mdx).
+
+  **Owner:** \[Add owner\] · **Last reviewed:** 2026-07-01
+</Note>
+
+## What is placement testing?
+
+Placement testing is how a new student's **starting level is set in each subject**. It runs early, before daily coursework, and has two parts:
+
+- **MAP screener** — a first-day **diagnostic** (NWEA). It gauges level and is **not** a pass/fail test. _(Different from the NWEA MAP growth test the school runs three times a year — see [Account & Access](/academics/account-access).)_
+- **Placement / Alpha tests** — the grade-level tests, delivered through the **Alpha Test Player**, that confirm the student's level per subject and unlock coursework.
+
+<Info>
+  **Where this sits in the journey:** **MAP → Placement → Courses.** During placement the dashboard is quiet by design (the student is testing, not doing daily coursework), which is itself a common ticket — see [TimeBack Concern 1](/learning-apps/timeback-mdx). Placement / Alpha tests **do award XP** on completion (e.g., 60–140 XP for a math grade-level test; **test-outs earn 2×**); the MAP screener is diagnostic. _(Source: TimeBack XP rules; confirm MAP-XP with an SME.)_
+</Info>
+
+## Top concerns
+
+Ranked by support impact. Each is tagged **User education** (resolved by explanation/procedure) or **Product defect** (needs a product-side fix).
+
+| # | Concern | Type | Impact |
+| --- | --- | --- | --- |
+| 1 | Password rejected at sign-in (must use "Continue with Google") | User education | Medium |
+| 2 | A subject is locked / unavailable (90% threshold to unlock) | User education | Medium–High |
+| 3 | Placement starts too low or re-tests already-passed grades | User education | Medium–High |
+| 4 | Test submits early or gets stuck on "Incomplete" | Product defect | High |
+| 5 | Test screen is blank or won't load | Product defect | Medium |
+
+---
+
+### 1. Password rejected at sign-in
+
+- **Type:** User education
+- **Applications:** Alpha Test Player (placement)
+- **Symptom / verbatim:** Fariha Fatima — the Alpha Test Player **rejected the standard password**; **"Continue with Google"** was required.
+- **Root cause:** The test player signs in via **Google SSO** for these accounts — the standard password won't work. Students authenticate with their **school Google account** (TimeBack provisions each student a Google Workspace account).
+
+**Resolution steps**
+
+<Steps>
+  <Step title="Use 'Continue with Google'">
+    Have the student choose **"Continue with Google"** instead of typing a password.
+  </Step>
+  <Step title="Use the school Google account">
+    Confirm they're signing in with their **TimeBack-provisioned school Google account**, not a personal one.
+  </Step>
+  <Step title="Check provisioning if Google fails">
+    If Google sign-in also fails, the account may not be provisioned yet — confirm the student has an active Google Workspace/TimeBack account (see [rostering](/operations/enrollment/readiness-and-rostering)).
+  </Step>
+</Steps>
+
+**Verify resolved:** The student signs in via Google and reaches their placement test.
+
+**Canned response**
+
+```text
+Hi [Parent name], happy to help [Student] get into their placement test! This one
+signs in with Google rather than a typed password — on the sign-in screen, choose
+"Continue with Google" and use [Student]'s school Google account. That should take
+them straight in. If the Google sign-in doesn't work either, let me know and I'll
+make sure their account is fully set up.
+```
+
+**Metadata:** Reported by Fariha Fatima · Severity **Medium**
+
+### 2. A subject is locked / unavailable
+
+- **Type:** User education
+- **Applications:** Alpha Test Player (placement)
+- **Symptom / verbatim:** Alexandria Jan `[6/29]` — science and writing were **unavailable**; unlocking them requires **90%** on lower-grade tests.
+- **Root cause:** Subjects and levels **unlock progressively** — a student must pass the lower-grade placement tests (around **90%**) before higher-grade or additional-subject tests open. A locked subject is expected, not broken.
+
+**Resolution steps**
+
+<Steps>
+  <Step title="Explain the unlock logic">
+    Subjects/levels open as the student passes the lower-grade tests (around **90%**). A locked subject means the prerequisite hasn't been cleared yet.
+  </Step>
+  <Step title="Point to the open test">
+    Have the student complete the **currently-available** placement test first — that's what unlocks the next one.
+  </Step>
+  <Step title="Reassure it's automatic">
+    Locked subjects unlock on their own as the student progresses — nothing needs to be requested.
+  </Step>
+</Steps>
+
+**Verify resolved:** The locked subject unlocks after the student passes the prerequisite test.
+
+**Canned response**
+
+```text
+Hi [Parent name], good question! Those subjects aren't broken — they unlock as
+[Student] passes the earlier-grade placement tests (usually around 90%). So the best
+next step is to finish the test that's currently open, and science/writing will
+unlock automatically from there. Let me know if one doesn't open after [Student]
+passes the earlier one and I'll take a look!
+```
+
+**Metadata:** Reported by Alexandria Jan `[6/29]` · Severity **Medium–High**
+
+### 3. Placement starts too low or re-tests already-passed grades
+
+- **Type:** User education
+- **Applications:** Alpha Test Player (placement)
+- **Symptom / verbatim:**
+  - Muhammad Ahmed — reading placement **began at kindergarten**; asked if that was expected.
+  - Napatt / Nuttapone — **passed grade 3 math but was still asked to complete grades 1 and 2**; a retry returned an error.
+  - Zoey Hsu — asked whether **failing the grade 6 placement** would start her at grade 6 or grade 5.
+- **Root cause:** Placement **confirms foundational skills**, so it can start lower or re-check earlier grades before settling the level — this is by design (the [MAP → Placement → Courses sequence](/learning-apps/timeback-mdx)). Failing a level places the student at the appropriate lower level; passing advances them. _The "retry returned an error" (Napatt) may be a separate defect — capture it._
+
+**Resolution steps**
+
+<Steps>
+  <Step title="Explain how placement finds the level">
+    Placement checks foundational skills, so it may start lower or re-confirm earlier grades before locking in the level. Starting low isn't a mistake.
+  </Step>
+  <Step title="Set expectations on the result">
+    Failing a level simply places the student at the right lower level; passing advances them. It's a one-time sequence, then daily coursework begins at the confirmed level.
+  </Step>
+  <Step title="Rule out a defect">
+    If a retry **returns an error** or the sequence keeps re-testing an already-passed grade, capture the student, subject, and error so it can be looked at.
+  </Step>
+</Steps>
+
+**Verify resolved:** The student completes the placement sequence and lands at the correct level, or a stuck/error case is documented.
+
+**Canned response**
+
+```text
+Hi [Parent name], great question! Placement starts by confirming the building-block
+skills, so it can begin a bit lower or double-check earlier grades before it settles
+on [Student]'s level — that's normal, not a mistake. Whatever they pass or don't
+determines exactly where their coursework begins, and it's a one-time setup. If a
+test throws an error when [Student] retries, send me the details and I'll get it
+checked.
+```
+
+**Metadata:** Reported by Muhammad, Napatt/Nuttapone, Zoey · Severity **Medium–High**
+
+### 4. Test submits early or gets stuck on "Incomplete"
+
+- **Type:** Product defect
+- **Applications:** Alpha Test Player (placement)
+- **Symptom / verbatim:**
+  - Elliott — a reading test **submitted at question 2 of 36**.
+  - Alexandria — a test was **stuck on "Incomplete."**
+- **Root cause:** Suspected defect — a test submitting prematurely or failing to register completion.
+
+**Resolution steps**
+
+<Steps>
+  <Step title="Confirm the symptom">
+    Check whether the test **ended early** (e.g., submitted at Q2 of 36) or shows **"Incomplete"** despite the student finishing.
+  </Step>
+  <Step title="Reload and re-enter">
+    Have the student log out and back in, then reopen the test from the **Placement** menu.
+  </Step>
+  <Step title="Don't rely on an early submission">
+    If it submitted early, the test likely needs to be **reset/re-assigned** rather than counted — don't treat the partial result as the placement.
+  </Step>
+  <Step title="Capture the specifics">
+    Note the student, subject, where it stopped (question count), and a screenshot so it can be reset and fixed.
+  </Step>
+</Steps>
+
+**Verify resolved:** The student can complete the full test and it registers as complete.
+
+**Canned response**
+
+```text
+Hi [Parent name], thanks for flagging this, and sorry for the hassle! It sounds like
+the test ended before [Student] finished (or won't move off "Incomplete"). First,
+could they log out and back in and reopen it from the Placement menu? If it still
+submits early or sticks, don't worry — we won't count a partial test as their
+placement. Send me the subject and roughly where it stopped, and I'll get it reset.
+```
+
+**Metadata:** Reported by Elliott, Alexandria · Severity **High**
+
+### 5. Test screen is blank or won't load
+
+- **Type:** Product defect
+- **Applications:** Alpha Test Player (placement)
+- **Symptom / verbatim:** _Reported pattern_ — "blank or locked tests" that won't display.
+- **Root cause:** Suspected loading/display defect (a blank screen) — distinct from a subject being **intentionally locked** (see [Concern 2](#2-a-subject-is-locked--unavailable)).
+
+**Resolution steps**
+
+<Steps>
+  <Step title="Rule out an intentional lock">
+    Confirm it's a **blank / won't-load** screen, not a subject that's locked until a prerequisite is passed (that's [Concern 2](#2-a-subject-is-locked--unavailable)).
+  </Step>
+  <Step title="Reload / try another browser">
+    Refresh or hard-reload, try a different browser, and check the internet connection.
+  </Step>
+  <Step title="Re-enter via the Placement menu">
+    Go back to the **Placement** menu and reopen the test.
+  </Step>
+  <Step title="Capture specifics if it persists">
+    Note the student, the test, and a screenshot so the loading issue can be fixed.
+  </Step>
+</Steps>
+
+**Verify resolved:** The test loads and the student can begin.
+
+**Canned response**
+
+```text
+Hi [Parent name], sorry the test won't come up! A couple of quick things: have
+[Student] refresh the page (or try a different browser), then reopen the test from
+the Placement menu. If it's a specific subject that's greyed out rather than blank,
+that's usually just locked until an earlier test is passed. If it's still blank after
+a refresh, send me a screenshot and I'll get it looked into.
+```
+
+**Metadata:** Reported pattern (blank/locked tests) · Severity **Medium**
+
+---
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="How placement works" icon="arrow-progress" href="/academics/account-access">
+    The parent-facing workflow: MAP screener, the Placement menu, and how coursework adjusts.
+  </Card>
+
+  <Card title="TimeBack: MAP → Placement → Courses" icon="gauge-high" href="/learning-apps/timeback-mdx">
+    The sequence explainer, the "No XP" triage, and why the dashboard is quiet during testing.
+  </Card>
+</CardGroup>
+
+<Tip>
+  **Confirm before publishing:** the app name (Alpha Test Player vs. "Placement Tests"), whether the 90% unlock threshold is exact, whether MAP itself awards XP, and whether #4 (early submit / stuck) and Napatt's retry error (#3) are still open defects.
+</Tip>
