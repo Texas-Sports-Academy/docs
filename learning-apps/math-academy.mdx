@@ -1,5 +1,5 @@
 ---
-title: "Math Academy"
+title: "math-academy"
 ---
 
 ## Subjects & Grades
@@ -25,3 +25,174 @@ title: "Math Academy"
 ## Accuracy Threshold
 
 - Driven by Math Academy's own reporting (no separate threshold)
+
+<Note>
+  **Scope of this page.** This is the Math Academy entry in the app support library. It covers **what it is**, its **XP rules**, and the **top concerns** — each with resolution steps, a "verify resolved" check, and a ready-to-paste canned response. For the shared playbook framework, severity levels, and the "No XP" triage tree, see the [TimeBack page](/learning-apps/timeback-mdx).
+
+  **Owner:** \[Add owner\] · **Last reviewed:** 2026-07-01
+</Note>
+
+## What is Math Academy?
+
+Math Academy is TSA's **core math app** — the most advanced adaptive math platform used across **grades 3–12**. On day one it diagnoses a student's exact mathematical **Knowledge Grade**, then builds a personalized path forward, covering each concept in the precise sequence needed to build a solid foundation. For older students the path includes **SAT Math prep** and routes toward **AP Calculus AB/BC** and **AP Statistics**.
+
+<CardGroup cols={2}>
+  <Card title="Adaptive & sequential" icon="diagram-project">
+    Diagnoses the student's Knowledge Grade and advances concept-by-concept in a fixed mastery sequence.
+  </Card>
+
+  <Card title="Real-time XP" icon="bolt">
+    XP matches exactly what the app shows and posts in near real time (webhook, under a minute).
+  </Card>
+</CardGroup>
+
+## Purpose
+
+- Deliver **core math instruction** for grades 3–12 (per the TSA curriculum, Math Academy is the primary math app across these grades).
+- **Diagnose and place** each student at their true Knowledge Grade, then advance them through a personalized, mastery-based sequence.
+- Prepare high-schoolers for **SAT Math** and **AP Calculus / Statistics**.
+
+<Info>
+  Unlike most learning apps, Math Academy has **no accuracy threshold** for XP and reports in **real time** — its XP "matches what the app shows." So XP-timing tickets are rare here; when XP looks wrong it's more likely a genuine anomaly than the usual accuracy/delay explanation. _(Source: TimeBack XP rules.)_
+</Info>
+
+## XP quick reference
+
+Grounded in TimeBack's per-app XP rules.
+
+| App | Accuracy needed | Typical delay | Notes |
+| --- | --- | --- | --- |
+| Math Academy | None (matches app) | \< 1 min (real-time webhook) | XP equals what Math Academy shows |
+
+## Top concerns
+
+Ranked by support impact. Each is tagged **User education** (resolved by explanation/procedure), **Product limitation** (works as designed; no per-student change), or **Product defect** (needs a product-side fix).
+
+| # | Concern | Type | Impact |
+| --- | --- | --- | --- |
+| 1 | Fixed 90-question modules feel too long / rigid | Product limitation | Medium |
+| 2 | "/" (slash) keystroke marks a correct answer wrong | Product defect | Medium–High |
+| 3 | Math XP anomaly (e.g., unexpected "−2 XP" / XP not matching) | Product defect | Medium |
+
+---
+
+### 1. Fixed 90-question modules feel too long / rigid
+
+- **Type:** Product limitation
+- **Applications:** Math Academy
+- **Symptom / verbatim:** Zoey Hsu — Math Academy modules are a **fixed 90 questions**, which feels too long and cannot be shortened or skipped.
+- **Root cause:** Math Academy advances through a fixed mastery sequence; module length is set by the curriculum, not adjustable per student. Working as designed, but experienced as rigid.
+
+**Resolution steps**
+
+<Steps>
+  <Step title="Explain how modules work">
+    Math Academy modules are a set length so a skill is fully covered before moving on — there is no way to shorten or skip them, by design.
+  </Step>
+  <Step title="Reframe the length">
+    Progress **saves as the student goes**, so a module doesn't have to be finished in one sitting.
+  </Step>
+  <Step title="Suggest chunking">
+    Encourage breaking a module across a couple of shorter sessions — XP still accrues toward the daily target.
+  </Step>
+  <Step title="Check placement">
+    If modules feel too long/hard across the board, the level may be set too high. Confirm the student's placement with their teacher.
+  </Step>
+</Steps>
+
+**Verify resolved:** The student progresses through modules in manageable chunks, or a placement review is underway.
+
+**Canned response**
+
+```text
+Hi [Parent name], thanks for reaching out about the module length! Math Academy's
+modules are a set length because they're built to fully cover a skill before moving
+on — there isn't a way to shorten them, but the good news is progress saves as
+[Student] goes, so they don't have to finish in one sitting. Breaking it into a
+couple of shorter sessions works well and still counts toward the daily goal. If it
+feels too long across the board, it can be a sign the level is set a bit high — I'm
+happy to check [Student]'s placement. Thanks for flagging it!
+```
+
+**Metadata:** Reported by Zoey Hsu · Severity **Medium**
+
+### 2. "/" (slash) keystroke marks a correct answer wrong
+
+- **Type:** Product defect
+- **Applications:** Math Academy (also seen in FastMath, reading, Alpha Standardized Writing)
+- **Symptom / verbatim:** Howie & Harrison — entering a **"/"** (e.g., for a fraction) causes an otherwise-correct answer to be marked wrong.
+- **Root cause:** Suspected input-handling defect with the "/" character in the answer field.
+
+**Resolution steps**
+
+<Steps>
+  <Step title="Confirm the pattern">
+    Verify the answer is marked wrong specifically when a **"/"** is entered (e.g., typing a fraction like 1/2).
+  </Step>
+  <Step title="Offer an input workaround">
+    Have the student enter the answer a different way — the fraction button/template if available, or the decimal equivalent — instead of typing "/".
+  </Step>
+  <Step title="Capture the specifics">
+    Note the exact question, the answer entered, and a screenshot so the defect can be documented and fixed.
+  </Step>
+</Steps>
+
+**Verify resolved:** The student can submit correct answers using the workaround, and the case is documented.
+
+**Canned response**
+
+```text
+Hi [Parent name], thanks for flagging this — that sounds frustrating! It looks like
+typing a "/" (for a fraction) can cause a correct answer to be marked wrong. Until
+that's fixed, could [Student] try entering the answer a different way — using the
+fraction button if there is one, or the decimal form? If you can send the exact
+question and a screenshot, I'll get it documented so it can be corrected. Sorry for
+the hassle in the meantime!
+```
+
+**Metadata:** Reported by Howie & Harrison · Severity **Medium–High**
+
+### 3. Math XP anomaly (e.g., unexpected "−2 XP" / XP not matching)
+
+- **Type:** Product defect (to confirm)
+- **Applications:** Math Academy _(app attribution to confirm)_
+- **Symptom / verbatim:** Alex Chu — reported a math **"−2 XP" anomaly** (XP not matching what was earned).
+- **Root cause:** Unclear. Because Math Academy posts XP in real time with no accuracy threshold, a negative or mismatched value is anomalous and likely a genuine reporting issue rather than the usual accuracy/delay explanation. _Confirm which math app this occurred in before finalizing — the insights note only says "math."_
+
+**Resolution steps**
+
+<Steps>
+  <Step title="Confirm the app and the value">
+    Identify which math app it was and compare the XP the app itself showed against the dashboard. Math Academy's XP should match the app exactly.
+  </Step>
+  <Step title="Rule out the usual explanations">
+    Since Math Academy is real-time with no accuracy threshold, delay and accuracy are **not** the cause here — a mismatch points to a reporting anomaly.
+  </Step>
+  <Step title="Reassure and capture">
+    Earned XP is recorded on the account. Note the student, app, activity, and the anomalous value (with a screenshot) so it can be corrected.
+  </Step>
+  <Step title="Verify against the data (optional)">
+    If you have data access, confirm what actually posted (see the [TimeBack "How to verify a student's XP"](/learning-apps/timeback-mdx) reference).
+  </Step>
+</Steps>
+
+**Verify resolved:** The dashboard XP matches the app's XP, or the anomaly is documented with specifics for correction.
+
+**Canned response**
+
+```text
+Hi [Parent name], thanks for pointing this out, and I understand the concern! First,
+please rest assured [Student]'s earned XP is safely recorded. Math Academy's XP is
+meant to match exactly what the app shows, so a number that looks off is worth a
+closer look. Could you tell me which app it was and share what [Student] saw (a
+screenshot helps)? I'll compare it against our records and get any discrepancy
+corrected.
+```
+
+**Metadata:** Isolated · Severity **Medium**
+
+---
+
+<Tip>
+  **Confirm before publishing:** which math app the "−2 XP" anomaly (#3) actually occurred in, whether the "/" grading defect (#2) is still open, and whether module length (#1) has any teacher-side flexibility.
+</Tip>
