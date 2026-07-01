@@ -1,5 +1,7 @@
 ---
-title: "alphawrite"
+title: "AlphaWrite"
+sidebarTitle: "AlphaWrite"
+description: "What AlphaWrite is, how its full-marks XP works, and the concerns most often raised about it."
 ---
 
 ## Subjects & Grades
@@ -19,3 +21,168 @@ title: "alphawrite"
 
 - 15 XP per activity in Sentences & Paragraphs
 - 125 XP per completed essay
+
+<Note>
+  **Scope of this page.** This is the AlphaWrite entry in the app support library. It covers **what it is**, its **XP rules**, and the **top concerns** — each with resolution steps, a "verify resolved" check, and a ready-to-paste canned response. For the shared playbook framework, severity levels, and the "No XP" triage tree, see the [TimeBack page](/learning-apps/timeback-mdx).
+
+  **Owner:** \[Add owner\] · **Last reviewed:** 2026-07-01
+</Note>
+
+## What is AlphaWrite?
+
+AlphaWrite is TSA's **writing** app for **grades 6–8**. Students build writing skills through **Sentences & Paragraphs** activities and longer **essays**, earning XP as they complete work to a high standard.
+
+<CardGroup cols={2}>
+  <Card title="Writing practice" icon="pen">
+    Sentence, paragraph, and essay activities that build composition skills.
+  </Card>
+
+  <Card title="Full-marks XP" icon="award">
+    XP rewards **completed, high-quality** writing — an activity needs to reach full marks to earn its XP.
+  </Card>
+</CardGroup>
+
+## Purpose
+
+- Build **writing skills** for grades 6–8 through structured Sentences & Paragraphs activities and essays.
+- Reward **completed, high-quality** work rather than partial drafts.
+- Report to TimeBack **natively** (first-party); XP posts in **under a minute**.
+
+<Info>
+  AlphaWrite is a **first-party app** — it is **not** in the third-party [Bridge](/learning-apps/timeback-mdx). Its XP model is stricter than most: an activity earns XP only when it reaches **full marks (100/100)**, and **retries earn progressively less**. See the [XP quick reference](#xp-quick-reference).
+</Info>
+
+## XP quick reference
+
+Grounded in TimeBack's per-app XP rules.
+
+| App | Requirement | Typical delay | Notes |
+| --- | --- | --- | --- |
+| AlphaWrite | 100/100 score (and ≥80% accuracy) | \< 1 min | Writing (G6–8); base **15 XP per activity**; **\+25%** for 100% accuracy (→ 18.75); **125 XP per completed essay** |
+
+<Info>
+  Two things surprise families: an activity earns XP only at **full marks (100/100)**, and the **attempt multiplier** means retries are worth less — **1st attempt ×1.0, 2nd ×0.5, 3rd ×0.25, 4th\+ ×0**. _(Source: TimeBack XP rules; confirm the exact scoring/accuracy rule with an SME.)_
+</Info>
+
+## Top concerns
+
+Ranked by support impact. Each is tagged **User education** (resolved by explanation/procedure) or **Product defect** (needs a product-side fix).
+
+| # | Concern | Type | Impact |
+| --- | --- | --- | --- |
+| 1 | A correct writing answer is scored as wrong | Product defect | Medium–High |
+| 2 | No XP unless the activity reaches full marks | User education | Medium |
+| 3 | Less XP on repeated attempts | User education | Low–Medium |
+
+---
+
+### 1. A correct writing answer is scored as wrong
+
+- **Type:** Product defect
+- **Applications:** AlphaWrite _(also referred to in tickets as "Alpha Standardized Writing" — confirm naming)_
+- **Symptom / verbatim:** Harrison — a **writing test scored a correct answer as wrong**.
+- **Root cause:** Suspected grading defect in the writing/standardized-writing scoring — a valid response marked incorrect.
+
+**Resolution steps**
+
+<Steps>
+  <Step title="Confirm the pattern">
+    Verify the response should have counted as correct but was marked wrong.
+  </Step>
+  <Step title="Capture the specifics">
+    Note the prompt/question, what the student wrote, the expected answer, and a screenshot so the scoring can be reviewed and corrected.
+  </Step>
+  <Step title="Reassure the student">
+    Their work isn't lost — the item can be reviewed and the score corrected.
+  </Step>
+</Steps>
+
+**Verify resolved:** The item is documented for review, and — if it's a scoring defect — flagged for a fix.
+
+**Canned response**
+
+```text
+Hi [Parent name], thanks for flagging this, and sorry for the frustration! It sounds
+like [Student]'s writing answer was marked wrong when it should have counted. Could
+you send me the prompt, what [Student] wrote, and a screenshot? I'll get it reviewed
+so the scoring can be checked and corrected. Their work isn't lost in the meantime —
+thanks for your patience!
+```
+
+**Metadata:** Reported by Harrison · Severity **Medium–High**
+
+### 2. No XP unless the activity reaches full marks
+
+- **Type:** User education
+- **Applications:** AlphaWrite
+- **Symptom / verbatim:** _Anticipated from AlphaWrite's XP rules_ — "my child wrote a whole piece but got no XP."
+- **Root cause:** AlphaWrite awards its 15 XP per activity only when the work reaches **full marks (100/100)** (with ≥80% accuracy). A draft that isn't yet at full marks earns no XP; 100% accuracy adds a 25% bonus.
+
+**Resolution steps**
+
+<Steps>
+  <Step title="Check the score">
+    AlphaWrite needs a **100/100** on the activity for XP — confirm whether the piece reached full marks.
+  </Step>
+  <Step title="Explain the bar">
+    Writing activities award XP at full marks; a piece that isn't there yet can be **revised and resubmitted** to earn it (and top accuracy adds a 25% bonus).
+  </Step>
+  <Step title="Encourage revision">
+    Have the student polish and complete the activity to full marks.
+  </Step>
+</Steps>
+
+**Verify resolved:** XP posts when the activity reaches 100/100.
+
+**Canned response**
+
+```text
+Hi [Parent name], good question! AlphaWrite awards its XP when an activity is
+completed at full marks (a 100/100), so a writing piece that isn't quite there yet
+won't add XP until it's finished to that level. The good news is [Student] can revise
+and resubmit — reaching full marks posts the XP (and top accuracy adds a bonus).
+Happy to help [Student] polish it if that would help!
+```
+
+**Metadata:** Grounded in XP rules; watch for tickets · Severity **Medium**
+
+### 3. Less XP on repeated attempts
+
+- **Type:** User education
+- **Applications:** AlphaWrite
+- **Symptom / verbatim:** _Anticipated from AlphaWrite's XP rules_ — "my child redid the activity but earned less XP."
+- **Root cause:** An **attempt multiplier** reduces XP on retries: **1st attempt ×1.0, 2nd ×0.5, 3rd ×0.25, 4th and beyond ×0**. Later attempts earn progressively less by design.
+
+**Resolution steps**
+
+<Steps>
+  <Step title="Explain the multiplier">
+    The first attempt earns full XP; each retry earns less — about half on the second, a quarter on the third, and none from the fourth on.
+  </Step>
+  <Step title="Encourage a careful first attempt">
+    Doing the best work on the first try earns the most XP.
+  </Step>
+  <Step title="Reassure">
+    Earned XP is recorded on the account; nothing is lost.
+  </Step>
+</Steps>
+
+**Verify resolved:** The XP matches the attempt number, and the parent understands why retries earn less.
+
+**Canned response**
+
+```text
+Hi [Parent name], quick note on AlphaWrite XP — the first attempt at an activity
+earns the full XP, and each retry after that earns a bit less (about half on the
+second try, a quarter on the third). So if [Student] redid an activity a few times,
+the later attempts add less. It's all working as intended, and their earned XP is
+saved. Encouraging a careful first attempt earns the most!
+```
+
+**Metadata:** Grounded in XP rules; watch for tickets · Severity **Low–Medium**
+
+---
+
+<Tip>
+  **Confirm before publishing:** the app name (AlphaWrite vs. "Alpha Standardized Writing"), the exact full-marks/accuracy XP rule, whether the grading defect (#1) is still open, and the essay XP (125) with an SME.
+</Tip>
