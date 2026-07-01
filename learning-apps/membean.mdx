@@ -1,5 +1,8 @@
 ---
-title: "membean"
+title: "Membean"
+sidebarTitle: "Membean"
+description: "What Membean is, how its session-based vocabulary XP works, and the concerns most often raised about it."
+icon: "spell-check"
 ---
 
 ## Subjects & Grades
@@ -23,3 +26,176 @@ title: "membean"
 ## Accuracy Threshold
 
 - 80% accuracy required
+
+<Note>
+  **Scope of this page.** This is the Membean entry in the app support library. It covers **what it is**, its **XP rules**, and the **top concerns** — each with resolution steps, a "verify resolved" check, and a ready-to-paste canned response. For the shared playbook framework, severity levels, and the "No XP" triage tree, see the [TimeBack page](/learning-apps/timeback-mdx).
+
+  **Owner:** \[Add owner\] · **Last reviewed:** 2026-07-01
+</Note>
+
+## What is Membean?
+
+Membean is a **vocabulary learning platform** that uses **adaptive spaced-repetition** — it reintroduces words over time so they stick in long-term memory. At TSA it's the vocab app for **grades 6–8**. Students learn in **training sessions** that mix **new words** and **review words**.
+
+<CardGroup cols={2}>
+  <Card title="Spaced repetition" icon="repeat">
+    Words come back at increasing intervals so they move into long-term memory — reviews are part of the design.
+  </Card>
+
+  <Card title="Session-based" icon="clock">
+    Students train in sessions; Membean scores accuracy and productive minutes across the whole session.
+  </Card>
+</CardGroup>
+
+## Purpose
+
+- Build **vocabulary** for grades 6–8 through adaptive, spaced-repetition training.
+- Mix **new and review words** so learning sticks over time.
+- Report per-session XP and progress into TimeBack.
+
+<Info>
+  Membean is a **third-party app** — it reports into TimeBack through the [Bridge](/learning-apps/timeback-mdx). Two things make its XP different from most apps: XP is **awarded at the end of a training session** (not during it), and it's **per word** (new words are worth more than reviews). See the [XP quick reference](#xp-quick-reference).
+</Info>
+
+## XP quick reference
+
+Grounded in TimeBack's per-app XP rules.
+
+| App | Accuracy needed | Typical delay | Notes |
+| --- | --- | --- | --- |
+| Membean | 80% (whole session) | 2–5 min | Vocab (G6–8); **~0.75 XP per new word**, **~0.33 XP per review word**; **\+25%** for a 100% session; **XP posts at the end of the session** |
+
+<Info>
+  Below **80% session accuracy**, no XP posts. XP is calculated **when the session ends** (then a 2–5 minute delay), and **review words earn less than new words** by design. These three facts explain nearly every Membean XP question. _(Source: TimeBack XP rules.)_
+</Info>
+
+## Top concerns
+
+Ranked by support impact. Each is tagged **User education** (resolved by explanation/procedure) or **Product defect** (needs a product-side fix).
+
+<Info>
+  Your insights data has no _specific_ Membean ticket — it was only a keyword mention. The concerns below are **preventive**, derived from how its XP works, and are the predictable questions to expect. Labeled accordingly.
+</Info>
+
+| # | Concern | Type | Impact |
+| --- | --- | --- | --- |
+| 1 | No XP until the training session is finished | User education | Medium |
+| 2 | No XP when session accuracy is below 80% | User education | Medium |
+| 3 | XP seems low for the time spent | User education | Low–Medium |
+
+---
+
+### 1. No XP until the training session is finished
+
+- **Type:** User education
+- **Applications:** Membean
+- **Symptom / verbatim:** _Anticipated from Membean's XP rules_ — "my child has been training but no XP has shown up."
+- **Root cause:** Membean calculates XP **when a training session ends**, not continuously — and then it posts after a **2–5 minute** delay. Mid-session, no XP will show.
+
+**Resolution steps**
+
+<Steps>
+  <Step title="Confirm the session finished">
+    Membean posts XP only when a **training session is completed** — check whether the student is still mid-session.
+  </Step>
+  <Step title="Explain end-of-session posting">
+    XP is tallied at the end of the session and then posts after a **2–5 minute** delay.
+  </Step>
+  <Step title="Finish and wait">
+    Have the student complete the session, then check back after a few minutes.
+  </Step>
+  <Step title="Rule out accuracy">
+    If the session is finished and XP still doesn't post, check the session accuracy ([Concern 2](#2-no-xp-when-session-accuracy-is-below-80)).
+  </Step>
+</Steps>
+
+**Verify resolved:** XP posts within 2–5 minutes after the student completes a session.
+
+**Canned response**
+
+```text
+Hi [Parent name], good news — nothing's wrong! Membean adds up XP at the end of a
+training session rather than during it, and it takes a few minutes to post. So if
+[Student] is mid-session (or just finished), the XP will appear shortly after they
+complete the session. Have them wrap up the session and check back in a few minutes —
+let me know if it still doesn't show and I'll look closer!
+```
+
+**Metadata:** Grounded in XP rules; watch for tickets · Severity **Medium**
+
+### 2. No XP when session accuracy is below 80%
+
+- **Type:** User education
+- **Applications:** Membean
+- **Symptom / verbatim:** _Anticipated from Membean's XP rules_ — "my child finished a session but got no XP."
+- **Root cause:** Membean requires **80% accuracy across the whole session** to award XP. A finished session below 80% earns **0 XP** — the app rule, not a malfunction. A perfect (100%) session adds a **25% bonus**.
+
+**Resolution steps**
+
+<Steps>
+  <Step title="Confirm the session finished">
+    First rule out a still-in-progress session (see [Concern 1](#1-no-xp-until-the-training-session-is-finished)).
+  </Step>
+  <Step title="Check session accuracy">
+    Membean needs **≥80% accuracy** for the session. Below that, no XP posts even after finishing.
+  </Step>
+  <Step title="Explain and encourage">
+    Slowing down to answer carefully lifts accuracy above the bar — and a 100% session earns a 25% bonus.
+  </Step>
+</Steps>
+
+**Verify resolved:** XP posts once the student completes a session at ≥80% accuracy.
+
+**Canned response**
+
+```text
+Hi [Parent name], quick tip on Membean XP — it needs the session's accuracy to be
+80% or higher to award XP. If [Student]'s session came in below that, it won't add XP
+even after finishing. Slowing down just a little to answer carefully usually does the
+trick (and a perfect session actually earns a 25% bonus!). Happy to help if [Student]
+finds the words tricky!
+```
+
+**Metadata:** Grounded in XP rules; watch for tickets · Severity **Medium**
+
+### 3. XP seems low for the time spent
+
+- **Type:** User education
+- **Applications:** Membean
+- **Symptom / verbatim:** _Anticipated from Membean's XP rules_ — "the same amount of time earned much less XP than before."
+- **Root cause:** XP is **per word**, and **review words (~0.33 XP) earn less than new words (~0.75 XP)** — so a review-heavy session earns less even for the same time. Reviews are core to spaced repetition, so this is expected. Membean also only credits **productive** practice (rushed or low-quality "dubious" minutes don't count).
+
+**Resolution steps**
+
+<Steps>
+  <Step title="Explain per-word XP">
+    New words earn more (~0.75 XP) than review words (~0.33 XP), so a session that's mostly review earns less — even for the same amount of time.
+  </Step>
+  <Step title="Explain quality matters">
+    Membean credits **productive** practice; rushed or guessed ("dubious") minutes don't count as real training.
+  </Step>
+  <Step title="Coach toward XP">
+    Steady, careful work — especially on new words — earns the most, and a 100% session adds a 25% bonus.
+  </Step>
+</Steps>
+
+**Verify resolved:** XP is consistent with the mix of new vs. review words and focused minutes in the session.
+
+**Canned response**
+
+```text
+Hi [Parent name], great question! Membean gives more XP for brand-new words (about
+0.75 each) than for review words (about 0.33 each), so a session that's mostly review
+earns less even for the same time — that's expected, since revisiting words is how
+they stick. It also only counts focused practice, so quick guessing doesn't add up.
+Steady, careful work on new words earns the most (and a 100% session adds a 25%
+bonus). Their progress is always saved!
+```
+
+**Metadata:** Grounded in XP rules; watch for tickets · Severity **Low–Medium**
+
+---
+
+<Tip>
+  **Confirm before publishing:** the per-word XP amounts and the "dubious minutes" behavior with an SME, and whether any real Membean tickets have since come in to add as observed concerns.
+</Tip>
