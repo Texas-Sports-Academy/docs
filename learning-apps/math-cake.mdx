@@ -1,0 +1,176 @@
+---
+title: "Math Cakes"
+sidebarTitle: "Math Cakes"
+description: "What Math Cakes is, how its XP works, and the concerns most often raised about it."
+---
+
+<Note>
+  **Scope of this page.** This is the Math Cakes entry in the app support library. It covers **what it is**, its **XP rules**, and the **top concerns** — each with resolution steps, a "verify resolved" check, and a ready-to-paste canned response. For the shared playbook framework, severity levels, and the "No XP" triage tree, see the [TimeBack page](/learning/learning-apps/timeback).
+
+  **Owner:** \[Add owner\] · **Last reviewed:** 2026-07-01
+</Note>
+
+## What is Math Cakes?
+
+Math Cakes is a **mastery-based math practice app** in the TSA math suite. Students move through a tiered path for each skill — a **diagnostic** to place them, **tutorials** to teach, **practice** to build fluency, and a **mastery test** to prove the skill. Activities are tiered **plain → bronze → silver → gold**, with gold being graded practice and mastery. _(Structure inferred from Math Cakes' XP rules; confirm the exact student-facing flow with an SME.)_
+
+## Purpose
+
+- Deliver **skill-by-skill math mastery** rather than open-ended practice.
+- Place students via a **diagnostic**, then move them through **tutorial → practice → mastery test** for each skill.
+- Reward **mastery** (passing the gold mastery test) rather than time-on-task alone.
+
+<Info>
+  Because Math Cakes is **mastery-based**, XP is tied to _passing_, not just doing the work — a failed mastery test earns **0 XP**. This drives most "my child worked but got no XP" tickets on this app. See the [XP quick reference](#xp-quick-reference).
+</Info>
+
+## XP quick reference
+
+Grounded in TimeBack's per-app XP rules. XP posts after a delay of **under 5 minutes**.
+
+| Activity | XP | Notes |
+| --- | --- | --- |
+| Diagnostic | 1 XP per minute | Placement; time-based |
+| Tutorial (plain / bronze / silver) | XP shown on the card | **First time only**; perfect score = **\+1 XP** |
+| Practice (gold) | 2 XP | Perfect score = **\+1 XP** |
+| Mastery Test (gold) | **Pass = 2 XP · Fail = 0 XP** | Perfect score = **\+1 XP** |
+
+<Info>
+  Two things surprise families: repeating a tutorial earns **no XP the second time** (first-time only), and **failing a mastery test earns 0 XP** even though the student did the work. Neither is a bug. _(Source: TimeBack XP rules.)_
+</Info>
+
+## Top concerns
+
+Ranked by support impact. Each is tagged **User education** (resolved by explanation/procedure), **Product limitation** (works as designed; no per-student change), or **Product defect** (needs a product-side fix).
+
+| # | Concern | Type | Impact |
+| --- | --- | --- | --- |
+| 1 | Course is too hard, with no way to adjust difficulty | Product limitation | Medium–High |
+| 2 | Family prefers "standard math" instead of Math Cakes | Product limitation | Medium |
+| 3 | No XP earned (failed mastery test or repeated tutorial) | User education | Medium |
+
+---
+
+### 1. Course is too hard, with no way to adjust difficulty
+
+- **Type:** Product limitation
+- **Applications:** Math Cakes
+- **Symptom / verbatim:**
+  - Nonthapat, Napatt `[6/29]` — the math is too hard, and there is no visible way to adjust the level.
+- **Root cause:** Math Cakes sets difficulty from the **diagnostic/placement**, not a manual difficulty slider. If placement is too high — or the student skipped the tutorials that scaffold a skill — practice and mastery tests will feel too hard.
+
+**Resolution steps**
+
+<Steps>
+  <Step title="Explain how leveling works">
+    Math Cakes is mastery-based: the level comes from the diagnostic, not a manual setting. There is no difficulty slider by design.
+  </Step>
+  <Step title="Route through tutorials first">
+    Have the student complete the **tutorials** for the skill before practice/mastery — they scaffold the skill and make the mastery test achievable.
+  </Step>
+  <Step title="Check placement">
+    If it is consistently too hard across skills, the placement/grade may be set too high. Confirm the student's placement with their teacher.
+  </Step>
+  <Step title="Flag a misplacement">
+    If placement looks wrong, note it for a placement review so the student can be re-leveled.
+  </Step>
+</Steps>
+
+**Verify resolved:** The student can complete tutorials and pass a mastery test at their level, or a placement review is underway.
+
+**Canned response**
+
+```text
+Hi [Parent name], thanks for letting us know Math Cakes feels too hard for
+[Student]! A quick note on how it works: Math Cakes sets each skill's level from
+the diagnostic, so there isn't a manual difficulty setting — but the tutorials are
+there to teach a skill before the practice and mastery test, so having [Student]
+work through those first usually helps it click. If it feels too hard across the
+board, it may be a placement issue — I'll check [Student]'s placement with their
+teacher and follow up. Thanks for flagging it!
+```
+
+**Metadata:** Reported `[6/29]` · Severity **Medium–High**
+
+### 2. Family prefers "standard math" instead of Math Cakes
+
+- **Type:** Product limitation
+- **Applications:** Math Cakes
+- **Symptom / verbatim:**
+  - Alex — requests standard math instead of Math Cakes.
+- **Root cause:** Math Cakes is the assigned mastery-based math approach; there isn't a self-serve option to swap it for a different math program per student.
+
+**Resolution steps**
+
+<Steps>
+  <Step title="Acknowledge the preference">
+    Recognize the request and explain that Math Cakes is the assigned math path, chosen for its skill-by-skill mastery approach.
+  </Step>
+  <Step title="Explain the benefit">
+    Mastery-based practice targets the specific skills a student hasn't yet mastered, rather than repeating what they already know.
+  </Step>
+  <Step title="Log the feedback">
+    Capture the preference as product feedback; program/curriculum changes are decided at the program level, not per ticket.
+  </Step>
+</Steps>
+
+**Verify resolved:** The family understands why Math Cakes is assigned, and the preference is logged.
+
+**Canned response**
+
+```text
+Hi [Parent name], thanks for sharing this! Math Cakes is [Student]'s assigned math
+path right now — it's built around mastering one skill at a time, so it focuses on
+exactly what [Student] hasn't mastered yet rather than repeating what they already
+know. There isn't a way to swap it for a different math program from here, but I've
+passed your preference along as feedback. Happy to help [Student] get more
+comfortable with it in the meantime!
+```
+
+**Metadata:** Isolated · Severity **Medium**
+
+### 3. No XP earned (failed mastery test or repeated tutorial)
+
+- **Type:** User education
+- **Applications:** Math Cakes
+- **Symptom / verbatim:** Students report completing Math Cakes work but seeing no XP.
+- **Root cause:** Math Cakes ties XP to **mastery**, not time. A **failed mastery test earns 0 XP**, and a **repeated tutorial earns no XP** (first-time only). Both look like "I did the work but got nothing."
+
+**Resolution steps**
+
+<Steps>
+  <Step title="Confirm what activity was done">
+    Identify whether it was a tutorial (first-time only), practice (gold), or a mastery test.
+  </Step>
+  <Step title="Explain the mastery rule">
+    A **failed mastery test earns 0 XP**, and a **repeated tutorial earns no XP** — this is the app rule, not a malfunction.
+  </Step>
+  <Step title="Encourage the path to XP">
+    XP comes from **passing** the gold practice/mastery test (2 XP, \+1 for a perfect score). Route the student back through the tutorial, then retry the mastery test.
+  </Step>
+  <Step title="Rule out a real gap">
+    If the student **passed** and still has no XP after the ~5-minute delay, treat it as a sync issue (see the [TimeBack "No XP" triage](/learning/learning-apps/timeback)).
+  </Step>
+</Steps>
+
+**Verify resolved:** XP posts within ~5 minutes after the student passes a gold practice/mastery activity.
+
+**Canned response**
+
+```text
+Hi [Parent name], good news — nothing's broken! Math Cakes gives XP for mastering
+a skill, not just for time spent, so a couple of things can lead to 0 XP: a
+mastery test that wasn't passed, or repeating a tutorial (those only give XP the
+first time). The way to earn it is to work back through the tutorial and then pass
+the gold practice/mastery test — that posts XP, usually within about 5 minutes. If
+[Student] passed and still doesn't see it after that, let me know and I'll take a
+closer look!
+```
+
+**Metadata:** Recurring XP pattern · Severity **Medium**
+
+---
+
+<Tip>
+  **Confirm before publishing:** the student-facing Math Cakes flow and tier names (plain/bronze/silver/gold) with an SME, whether placement can be adjusted by support or only by a teacher, and how "standard math" requests should actually be routed.
+</Tip>
