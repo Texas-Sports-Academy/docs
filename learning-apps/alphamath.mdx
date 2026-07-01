@@ -1,5 +1,5 @@
 ---
-title: "alphamath"
+title: "alphamath.mdx"
 ---
 
 ## Subjects & Grades
@@ -13,3 +13,170 @@ title: "alphamath"
 ## Accuracy Threshold
 
 - (no content found)
+
+<Note>
+  **Scope of this page.** This is the AlphaMath entry in the app support library. It covers **what it is**, its **XP rules**, and the **top concerns** — each with resolution steps, a "verify resolved" check, and a ready-to-paste canned response. For the shared playbook framework, severity levels, and the "No XP" triage tree, see the [TimeBack page](/learning-apps/timeback-mdx).
+
+  **Owner:** \[Add owner\] · **Last reviewed:** 2026-07-01
+</Note>
+
+## What is AlphaMath?
+
+AlphaMath is a first-party **math fluency** app used at TSA as a **hole-filling** (supplemental) math tool for **grades 3–5**, alongside the core math app. Students practice math facts against a **timer** to build fast, accurate recall.
+
+<Warning>
+  **Naming to confirm.** TimeBack's XP rules label this app **"AlphaMath Fluency (FastMath)"**, while the curriculum lists **AlphaMath** as math _hole-filling_. "AlphaMath" and "FastMath" appear to be the same app — confirm with an SME, since "FastMath" also shows up in tickets.
+</Warning>
+
+<CardGroup cols={2}>
+  <Card title="Timed fluency" icon="stopwatch">
+    Math-fact practice against a timer to build speed and automatic recall.
+  </Card>
+
+  <Card title="Hole-filling" icon="puzzle-piece">
+    Used to close specific gaps (G3–5) alongside the core math app.
+  </Card>
+</CardGroup>
+
+## Purpose
+
+- Build **math-fact fluency** (fast, accurate recall) as a supplement to the core math path.
+- Close **specific skill gaps** for grades 3–5.
+- Report to TimeBack **natively** (first-party); XP posts in **under a minute**.
+
+<Info>
+  AlphaMath is a **first-party app** — it is **not** in the third-party [Bridge](/learning-apps/timeback-mdx). XP is **time-based** (1 XP per minute practiced) but still requires **80% accuracy**, with a bonus for perfect accuracy. See the [XP quick reference](#xp-quick-reference).
+</Info>
+
+## XP quick reference
+
+Grounded in TimeBack's per-app XP rules.
+
+| App | Accuracy needed | Typical delay | Notes |
+| --- | --- | --- | --- |
+| AlphaMath Fluency (FastMath) | 80% | \< 1 min | First-party fluency; **1 XP per minute practiced**; **\+20%** for 100% accuracy |
+
+<Info>
+  XP is earned **per minute of practice at ≥80% accuracy**. Below 80%, no XP posts; hitting 100% accuracy adds a **20% bonus**. _(Source: TimeBack XP rules.)_
+</Info>
+
+## Top concerns
+
+Ranked by support impact. Each is tagged **User education** (resolved by explanation/procedure) or **Product defect** (needs a product-side fix).
+
+| # | Concern | Type | Impact |
+| --- | --- | --- | --- |
+| 1 | Timer runs over, then the answer is marked wrong | Product defect | Medium–High |
+| 2 | "/" (slash) keystroke marks a correct answer wrong | Product defect | Medium |
+| 3 | Little or no XP despite time practiced | User education | Medium |
+
+---
+
+### 1. Timer runs over, then the answer is marked wrong
+
+- **Type:** Product defect
+- **Applications:** AlphaMath / FastMath
+- **Symptom / verbatim:** Elliott — the FastMath **timer allowed an overrun**, and then the answer was **marked wrong**.
+- **Root cause:** Suspected timer/grading defect — the question let time run past the limit, then counted the response as incorrect rather than handling the timeout cleanly. **Resolution steps**
+
+<Steps>
+  <Step title="Confirm the pattern">
+    Verify the answer was correct but marked wrong **after the timer ran over** — a timeout being counted as an error, not a genuine mistake.
+  </Step>
+  <Step title="Coach a workaround">
+    Encourage the student to answer before the timer expires. If a question does time out, retry the set rather than treating that one as a real miss.
+  </Step>
+  <Step title="Capture the specifics">
+    Note the question, what was entered, and a screenshot so the timer/grading defect can be documented and fixed.
+  </Step>
+</Steps>
+
+**Verify resolved:** The student can complete timed sets without correct answers being lost, and the case is documented.
+
+**Canned response**
+
+```text
+Hi [Parent name], thanks for flagging this, and sorry for the frustration! It sounds
+like the timer ran over and then counted [Student]'s answer as wrong. Until that's
+sorted, it helps to answer before the timer runs out — and if it does time out, just
+retry the set rather than worrying about that one. If you can send the question and a
+screenshot, I'll get it documented so it can be fixed. Thanks for your patience!
+```
+
+**Metadata:** Reported by Elliott · Severity **Medium–High**
+
+### 2. "/" (slash) keystroke marks a correct answer wrong
+
+- **Type:** Product defect
+- **Applications:** AlphaMath / FastMath (also seen in Math Academy, reading, Alpha Standardized Writing)
+- **Symptom / verbatim:** Howie & Harrison — entering a **"/"** (e.g., for a fraction) causes an otherwise-correct answer to be marked wrong.
+- **Root cause:** Suspected input-handling defect with the "/" character in the answer field — the same pattern flagged on [Math Academy](/learning-apps/math-academy). **Resolution steps**
+
+<Steps>
+  <Step title="Confirm the pattern">
+    Verify the answer is marked wrong specifically when a **"/"** is entered (e.g., typing a fraction like 1/2).
+  </Step>
+  <Step title="Offer an input workaround">
+    Have the student enter the answer a different way — the fraction button/template if available, or the decimal equivalent — instead of typing "/".
+  </Step>
+  <Step title="Capture the specifics">
+    Note the exact question, the answer entered, and a screenshot so the defect can be documented and fixed.
+  </Step>
+</Steps>
+
+**Verify resolved:** The student can submit correct answers using the workaround, and the case is documented.
+
+**Canned response**
+
+```text
+Hi [Parent name], thanks for flagging this — that sounds frustrating! It looks like
+typing a "/" (for a fraction) can cause a correct answer to be marked wrong. Until
+that's fixed, could [Student] try entering the answer a different way — the fraction
+button if there is one, or the decimal form? If you can send the exact question and a
+screenshot, I'll get it documented so it can be corrected. Sorry for the hassle in
+the meantime!
+```
+
+**Metadata:** Reported by Howie & Harrison; cross-app · Severity **Medium**
+
+### 3. Little or no XP despite time practiced
+
+- **Type:** User education
+- **Applications:** AlphaMath / FastMath
+- **Symptom / verbatim:** _Anticipated from AlphaMath's XP rules_ — "my child practiced but earned little or no XP."
+- **Root cause:** XP is **1 XP per minute practiced, but only at ≥80% accuracy**. If accuracy stayed below 80%, no XP posts even though time was spent. Hitting 100% adds a 20% bonus. So XP reflects **accurate** practice time, not raw minutes. **Resolution steps**
+
+<Steps>
+  <Step title="Confirm time practiced and accuracy">
+    Check how long the student practiced and roughly what accuracy they held.
+  </Step>
+  <Step title="Explain the rule">
+    XP is **1 XP per minute — but only at ≥80% accuracy**. Below 80%, no XP posts even though time was spent; hitting 100% adds a **20% bonus**.
+  </Step>
+  <Step title="Coach toward XP">
+    Steady, accurate practice earns XP — encourage getting accuracy up rather than just spending more time.
+  </Step>
+  <Step title="Rule out a real gap">
+    If accuracy was ≥80% and XP is still missing after ~1 minute, treat it as a sync issue (see the [TimeBack "No XP" triage](/learning-apps/timeback-mdx)).
+  </Step>
+</Steps>
+
+**Verify resolved:** XP posts within ~1 minute for accurate practice, or the parent understands the accuracy requirement.
+
+**Canned response**
+
+```text
+Hi [Parent name], good question! AlphaMath earns XP for each minute of practice, but
+only when accuracy is 80% or higher — so if a session came in below that, it won't
+add XP even though [Student] put in the time. Getting accuracy up is the key (and a
+perfect 100% actually adds a 20% bonus!). If [Student] was practicing accurately and
+still didn't see XP after a minute or so, let me know and I'll take a closer look.
+```
+
+**Metadata:** Grounded in XP rules; watch for tickets · Severity **Medium**
+
+---
+
+<Tip>
+  **Confirm before publishing:** whether "AlphaMath" and "FastMath" are the same app (naming), whether the timer defect (#1) and "/" defect (#2) are still open, and the exact accuracy/XP behavior with an SME.
+</Tip>
