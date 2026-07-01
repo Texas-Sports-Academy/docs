@@ -1,5 +1,8 @@
 ---
-title: "egumpp"
+title: "egumpp.mdx"
+sidebarTitle: "eGumpp"
+description: "What eGumpp is, how its grammar XP works (90% tests, different-day retries), and the concerns most often raised about it."
+icon: "language"
 ---
 
 ## Subjects & Grades
@@ -19,3 +22,172 @@ title: "egumpp"
 ## Accuracy Threshold
 
 - (no content found)
+
+<Note>
+  **Scope of this page.** This is the eGumpp entry in the app support library. It covers **what it is**, its **XP rules**, and the **top concerns** — each with resolution steps, a "verify resolved" check, and a ready-to-paste canned response. For the shared playbook framework, severity levels, and the "No XP" triage tree, see the [TimeBack page](/learning-apps/timeback-mdx).
+
+  **Owner:** \[Add owner\] · **Last reviewed:** 2026-07-01
+</Note>
+
+## What is eGumpp?
+
+eGumpp is a **grammar and language** app used at TSA for **grades 6–7** (available 6–12). Students work through **tutorials, reinforcers, and tests**, where each lesson is made up of **several components** that each award XP.
+
+<CardGroup cols={2}>
+  <Card title="Grammar & language" icon="language">
+    Tutorials, reinforcers, and mastery tests that build grammar and writing mechanics.
+  </Card>
+
+  <Card title="Component-based XP" icon="list">
+    Each lesson has several parts, and XP is awarded for each part as it's completed.
+  </Card>
+</CardGroup>
+
+## Purpose
+
+- Build **grammar and language mechanics** for grades 6–7.
+- Combine **tutorials/reinforcers** (practice) with **PTM & Mastery tests** (assessment).
+- Report per-component XP into TimeBack.
+
+<Info>
+  eGumpp is a **first-party app** — it is **not** in the third-party [Bridge](/learning-apps/timeback-mdx). Two rules make its XP unusual: its **tests require 90% accuracy** (higher than the typical 80%), and **retry XP is only awarded on a different day**. See the [XP quick reference](#xp-quick-reference).
+</Info>
+
+## XP quick reference
+
+Grounded in TimeBack's per-app XP rules.
+
+| App | Accuracy needed | Typical delay | Notes |
+| --- | --- | --- | --- |
+| eGumpp | 90% (tests) · none (tutorials/reinforcers) | 2–5 min | Grammar/language (G6–7); XP **varies by lesson length**, awarded **per component**; **retry XP only on a different day** |
+
+<Info>
+  Two surprises: eGumpp's **PTM & Mastery tests need 90%** (not 80%), and **redoing a lesson the same day earns no XP** — retry XP only lands on a **different day**. Tutorials and reinforcers have no accuracy threshold. _(Source: TimeBack XP rules.)_
+</Info>
+
+## Top concerns
+
+Ranked by support impact. Each is tagged **User education** (resolved by explanation/procedure) or **Product defect** (needs a product-side fix).
+
+<Info>
+  Your insights data has no _specific_ eGumpp ticket — it was only a keyword mention. The concerns below are **preventive**, derived from how its XP works, and are the predictable questions to expect. Labeled accordingly.
+</Info>
+
+| # | Concern | Type | Impact |
+| --- | --- | --- | --- |
+| 1 | No XP on a test that scored below 90% | User education | Medium |
+| 2 | No XP when redoing a lesson the same day | User education | Medium |
+| 3 | XP varies by lesson (component-based) | User education | Low–Medium |
+
+---
+
+### 1. No XP on a test that scored below 90%
+
+- **Type:** User education
+- **Applications:** eGumpp
+- **Symptom / verbatim:** _Anticipated from eGumpp's XP rules_ — "my child finished the test but got no XP."
+- **Root cause:** eGumpp's **PTM & Mastery tests require 90% accuracy** — higher than most apps' 80%. A test below 90% earns no XP. (Tutorials and reinforcers have **no** accuracy threshold, so those still count.)
+
+**Resolution steps**
+
+<Steps>
+  <Step title="Identify the activity">
+    Check whether it was a **test** (PTM/Mastery) or a **tutorial/reinforcer** — the rules differ.
+  </Step>
+  <Step title="Explain the thresholds">
+    Tests need **≥90%** to award XP; tutorials and reinforcers have no minimum.
+  </Step>
+  <Step title="Encourage a retry (on a different day)">
+    A retry aiming for 90%\+ posts the XP — and note eGumpp only awards retry XP on a **different day** ([Concern 2](#2-no-xp-when-redoing-a-lesson-the-same-day)).
+  </Step>
+</Steps>
+
+**Verify resolved:** XP posts when the student passes the test at ≥90%.
+
+**Canned response**
+
+```text
+Hi [Parent name], quick note on eGumpp — its tests (the PTM/mastery tests) need 90%
+accuracy to award XP, which is a bit higher than most apps' 80%. So if [Student]
+finished a test just under that, it won't add XP. The tutorials and practice pieces
+don't have that bar, so those still count. A retry aiming for 90%+ should do it — and
+one heads-up, eGumpp only gives retry XP on a different day. Happy to help if the
+grammar is tricky!
+```
+
+**Metadata:** Grounded in XP rules; watch for tickets · Severity **Medium**
+
+### 2. No XP when redoing a lesson the same day
+
+- **Type:** User education
+- **Applications:** eGumpp
+- **Symptom / verbatim:** _Anticipated from eGumpp's XP rules_ — "my child did the lesson again but got no XP."
+- **Root cause:** eGumpp awards **retry XP only on a different day**. Repeating the same lesson again the **same day** earns no additional XP — it's designed to encourage spaced practice, not a malfunction.
+
+**Resolution steps**
+
+<Steps>
+  <Step title="Explain the different-day rule">
+    Redoing a lesson the **same day** doesn't add XP; a retry on a **different day** does.
+  </Step>
+  <Step title="Reassure it's intended">
+    This encourages spacing practice out — it isn't a glitch.
+  </Step>
+  <Step title="Suggest new work for today">
+    To keep earning XP the same day, move on to a **new** lesson rather than repeating one.
+  </Step>
+</Steps>
+
+**Verify resolved:** Retry XP posts when the student redoes the lesson on a later day, or new lessons earn XP the same day.
+
+**Canned response**
+
+```text
+Hi [Parent name], good question! eGumpp only gives XP for redoing a lesson on a
+different day — so if [Student] repeated the same lesson again the same day, it won't
+add more XP that day. It's designed that way to encourage spacing practice out, not a
+glitch. Coming back to it another day (or moving to a new lesson today) will earn XP
+again. Let me know if I can help!
+```
+
+**Metadata:** Grounded in XP rules; watch for tickets · Severity **Medium**
+
+### 3. XP varies by lesson (component-based)
+
+- **Type:** User education
+- **Applications:** eGumpp
+- **Symptom / verbatim:** _Anticipated from eGumpp's XP rules_ — "the same amount of work earned different XP."
+- **Root cause:** eGumpp XP **depends on lesson length**, and each lesson has **several components** that each award XP individually. Finishing only part of a lesson earns only that part's XP, and longer lessons are worth more.
+
+**Resolution steps**
+
+<Steps>
+  <Step title="Explain component-based XP">
+    Each lesson is several parts, and XP is given for each part as it's completed — so partial completion earns partial XP.
+  </Step>
+  <Step title="Note lesson length">
+    Longer lessons are worth more XP overall than shorter ones.
+  </Step>
+  <Step title="Encourage finishing the lesson">
+    Completing all the components of a lesson earns its full XP.
+  </Step>
+</Steps>
+
+**Verify resolved:** The XP matches the components completed, and finishing the full lesson earns its total.
+
+**Canned response**
+
+```text
+Hi [Parent name], great question! In eGumpp, each lesson is made up of several parts,
+and XP is given for each part as it's completed — and longer lessons are worth more.
+So finishing only part of a lesson earns only part of the XP. Wrapping up all the
+components of the lesson will pick up the rest. Their progress is always saved!
+```
+
+**Metadata:** Grounded in XP rules; watch for tickets · Severity **Low–Medium**
+
+---
+
+<Tip>
+  **Confirm before publishing:** the 90% test threshold, the different-day retry rule, and the per-component/lesson-length XP with an SME, and whether any real eGumpp tickets have since come in.
+</Tip>
