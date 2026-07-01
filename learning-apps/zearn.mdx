@@ -1,5 +1,8 @@
 ---
-title: "zearn"
+title: "Zearn"
+sidebarTitle: "Zearn"
+description: "What Zearn is, how students sign in, how its XP works, and the concerns most often raised about it."
+icon: "calculator"
 ---
 
 ## Subjects & Grades
@@ -17,3 +20,183 @@ title: "zearn"
 ## XP Rule
 
 - 25 XP per lesson (Grades K–3)
+
+<Note>
+  **Scope of this page.** This is the Zearn entry in the app support library. It covers **what it is**, its **XP rules**, and the **top concerns** — each with resolution steps, a "verify resolved" check, and a ready-to-paste canned response. For the shared playbook framework, severity levels, and the "No XP" triage tree, see the [TimeBack page](/learning-apps/timeback-mdx).
+
+  **Owner:** \[Add owner\] · **Last reviewed:** 2026-07-01
+</Note>
+
+## What is Zearn?
+
+Zearn is a **K–3 math-only adaptive learning platform** built on **Eureka Math \+ Open Up Resources**. Students work through **lessons and missions**, with two named assessment activities — **Tower of Power** and **Sprint** — that check whether a concept has stuck.
+
+<CardGroup cols={2}>
+  <Card title="Structured math path" icon="diagram-project">
+    Lessons and missions in a set sequence; each lesson is made up of several activities.
+  </Card>
+
+  <Card title="Login-card access" icon="id-card">
+    Students sign in with a **login card** — a class code, username, and password issued per class.
+  </Card>
+</CardGroup>
+
+## Purpose
+
+- Deliver **core math for the early grades (K–3)** through a structured, adaptive lesson path.
+- Use **Tower of Power** and **Sprint** activities to check mastery and flag students who are struggling.
+- Report per-lesson progress and XP into TimeBack.
+
+<Info>
+  Zearn is a **third-party app** — it reports into TimeBack through the [Bridge](/learning-apps/timeback-mdx) on a short poll cycle (~30 seconds), so XP lands in about **1–2 minutes**. Access depends on the student's **login card** (class code \+ credentials).
+</Info>
+
+## XP quick reference
+
+Grounded in TimeBack's per-app XP rules. Zearn has **no accuracy threshold**, but XP is spread across the activities in a lesson.
+
+| App | Accuracy needed | Typical delay | Notes |
+| --- | --- | --- | --- |
+| Zearn | None | 1–2 min (~30s poll) | K–3 math; up to **25 XP per lesson** across activities; Tower of Power / Sprint alerts zero specific activities |
+
+<AccordionGroup>
+  <Accordion title="How the 25 XP breaks down (K–2)" icon="star">
+    A full K–2 lesson can earn up to **25 XP** across its activities: Number Gym (4), Fluency (3), Math Chat / Learning Lab / Story Time / Z-Squad (12), Tower of Power (4), and Bonus lessons (2, when available). **Grade 3:** typically ~20 XP on the first attempt, ~10 XP for a redo.
+  </Accordion>
+
+  <Accordion title="Why an alert can zero XP" icon="triangle-exclamation">
+    If a student is flagged by a **Tower of Power alert**, the instructional activity **and** the Tower earn **0 XP** (other activities are unaffected). A **Sprint alert** zeros **just that fluency activity**. This is by design — the alert means the student needs support on that piece, not that XP is broken.
+  </Accordion>
+</AccordionGroup>
+
+## Top concerns
+
+Ranked by support impact. Each is tagged **User education** (resolved by explanation/procedure) or **Product defect** (needs a product-side fix).
+
+| # | Concern | Type | Impact |
+| --- | --- | --- | --- |
+| 1 | Can't enter Zearn without a class code | User education | High — the main Zearn ticket |
+| 2 | No XP after a "Tower of Power" or "Sprint" alert | User education | Medium |
+| 3 | Lower-than-expected XP on a partly finished lesson | User education | Medium |
+
+---
+
+### 1. Can't enter Zearn without a class code
+
+- **Type:** User education
+- **Applications:** Zearn
+- **Symptom / verbatim:** Rylie — required a **class code** to enter Zearn and didn't have it.
+- **Root cause:** Zearn sign-in uses a **login card** that includes a **class code**, username, and password. Families who don't have the card on hand can't get in. The class code is issued per class and is **retrievable** (login cards can be pulled per class, or a specific student's card resolved by name), so this is an access-info gap, not a defect. **Resolution steps**
+
+<Steps>
+  <Step title="Explain what's needed">
+    Zearn sign-in uses a **login card**: a class code plus a username and password.
+  </Step>
+  <Step title="Retrieve the login card">
+    Look up the student's **class**, then pull the class's **login cards** (or resolve the specific student's card by name) to get the class code and credentials.
+  </Step>
+  <Step title="Share and sign in">
+    Give the family the class code (and username/password) and have the student enter it on the Zearn sign-in screen.
+  </Step>
+  <Step title="Check for Google SSO">
+    If the class uses **"Sign in with Google,"** the student should use the linked school Google account instead of the card.
+  </Step>
+</Steps>
+
+**Verify resolved:** The student signs into Zearn with the class code and reaches their lessons.
+
+**Canned response**
+
+```text
+Hi [Parent name], happy to help [Student] get into Zearn! Zearn uses a login card
+that has a class code plus a username and password. [Student]'s class code is
+[class code] (username: [username], password: [password]) — enter the class code on
+the Zearn sign-in screen and they'll be in. If your class uses "Sign in with
+Google," use the linked school Google account instead. Let me know if it doesn't
+take and I'll double-check the card!
+```
+
+**Metadata:** Reported by Rylie · Severity **High**
+
+### 2. No XP after a "Tower of Power" or "Sprint" alert
+
+- **Type:** User education
+- **Applications:** Zearn
+- **Symptom / verbatim:** _Anticipated from Zearn's XP rules_ — a student completes work but a specific activity shows 0 XP.
+- **Root cause:** When Zearn raises a **Tower of Power alert**, the instructional activity and the Tower earn **0 XP**; a **Sprint alert** zeros that fluency activity. The alert flags that the student is struggling on that piece — it is intended behavior, not a malfunction. Other activities in the lesson still earn XP.
+
+**Resolution steps**
+
+<Steps>
+  <Step title="Identify the activity">
+    Check whether the 0-XP activity was tied to a **Tower of Power** or **Sprint** alert.
+  </Step>
+  <Step title="Explain the rule">
+    A Tower alert zeros the instructional activity **and** the Tower; a Sprint alert zeros that fluency activity. It flags that the student needs support on that piece — by design, not a malfunction.
+  </Step>
+  <Step title="Reassure on the rest">
+    The other activities in the lesson still earned their XP; the lesson isn't broken.
+  </Step>
+  <Step title="Point the way forward">
+    The student can revisit that concept — mastering it clears the struggle flag.
+  </Step>
+</Steps>
+
+**Verify resolved:** The parent understands the alert-zeroing, and the lesson's other activities show their XP.
+
+**Canned response**
+
+```text
+Hi [Parent name], good news — nothing's broken! Zearn flagged [Student] on a "Tower
+of Power" (or "Sprint") activity, which means it spotted they could use a little
+more support on that specific skill. When that happens, that one activity shows 0 XP
+by design, but the rest of the lesson still counts. Once [Student] gets that concept
+down, the flag clears. Happy to point you to the skill if it would help!
+```
+
+**Metadata:** Grounded in XP rules; watch for tickets · Severity **Medium**
+
+### 3. Lower-than-expected XP on a partly finished lesson
+
+- **Type:** User education
+- **Applications:** Zearn
+- **Symptom / verbatim:** _Anticipated from Zearn's XP rules_ — "my child did Zearn but only earned a few XP."
+- **Root cause:** A Zearn lesson is **several activities** and the ~25 XP is spread across them. Finishing only part of a lesson earns only that part's XP — and a **redo** earns roughly half (Grade 3). Zearn has no accuracy threshold, so this is about _completeness_, not accuracy.
+
+**Resolution steps**
+
+<Steps>
+  <Step title="Confirm how much was completed">
+    Check how many of the lesson's activities were finished — a lesson is several activities, up to ~25 XP total.
+  </Step>
+  <Step title="Explain the spread">
+    XP is spread across the activities, so partial completion earns partial XP. There's no accuracy cutoff — it's about completeness.
+  </Step>
+  <Step title="Note redo value">
+    A redo of a lesson earns roughly half (Grade 3), so repeats add less than the first pass.
+  </Step>
+  <Step title="Encourage finishing the lesson">
+    Completing all the activities in the lesson earns the full ~25 XP.
+  </Step>
+</Steps>
+
+**Verify resolved:** The XP matches the activities completed, and finishing the full lesson earns the expected total.
+
+**Canned response**
+
+```text
+Hi [Parent name], great question! A Zearn lesson is actually made up of several
+activities, and the XP (up to about 25 per lesson) is spread across all of them — so
+finishing just part of a lesson earns just part of the XP. Zearn doesn't require a
+minimum accuracy, so it's really about completing all the activities. If [Student]
+wraps up the full lesson, they'll pick up the rest of the XP. Let me know if you'd
+like me to check which activities are still open!
+```
+
+**Metadata:** Grounded in XP rules; watch for tickets · Severity **Medium**
+
+---
+
+<Tip>
+  **Confirm before publishing:** how support retrieves a student's login card / class code in practice (self-serve vs. teacher-pulled), and whether the K–2 vs. Grade 3 XP breakdown is still current.
+</Tip>
