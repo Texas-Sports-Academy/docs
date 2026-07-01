@@ -17,6 +17,30 @@ Getting laptops out the door is still partly manual: provisioning devices, linki
 
 For the family-facing laptop policy — the MacBook is provided for educational use and must be returned on withdrawal — see [Self-Pay](/funding/self-pay).
 
+### Shipping (USPS Click-N-Ship)
+
+(Note: currently working on integrating with the API and automating the shipping label creation)
+
+Our shipping provider is **USPS**. Once a family has reconfirmed their delivery address, create the shipment as follows:
+
+1. Sign in to USPS with the **Texas-Sports-Academy** user.
+2. Go to **Click-N-Ship** and create a new label.
+3. **Group all laptops for a household into one box.** For the shipping address, use the household's confirmed delivery address — one label per household, not per student.
+   - Enter the parents' phone number and email, sign them up for SMS delivery updates
+4. We use our own packaging. Enter:
+   - **Weight:** 6 lb per laptop in the box
+   - **Declared value:** $600 per laptop in the box
+   - **Box dimensions:** 16 × 14 × 4 in
+5. Select the **hazardous materials** option and signify that it's an **electronic with a new laptop / new battery, sealed**.
+6. For extra options, select **extra insurance** only.
+7. Finish and add label to cart, continue for all labels
+8. Add all to cart, checkout (if missing card csv, message Arpan)
+9. Print label as PDF, then go to [Wework print hub](https://members.wework.com/workplaceone/content2/print), add the file to print queue, print using Wework card
+10. Attach print labels to box, ship at USPS. Get delivery receipt at counter (in future, may have scheduled pickups from Wework)
+11. Send out SalesMessage to all parents that had laptop shipped during day, letting them know the Macbooks are on the way. Current message:
+
+> Your (Macbook is | [#] MacBooks are) on the way! You will receive SMS tracking updates from USPS and see laptop updates in your portal shortly. Please make sure an adult is home to sign for them. If there are any issues with delivery, just respond and let us know.
+
 ## Developer notes
 
 Both confirmations go through the same mutation, `home.confirmLaptop`, distinguished by a `reconfirm` flag:
