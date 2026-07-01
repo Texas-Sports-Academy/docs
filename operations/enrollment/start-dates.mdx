@@ -1,0 +1,44 @@
+---
+title: "Start dates"
+sidebarTitle: "Start Dates"
+description: "How start dates are selected, capped, and rolled forward during enrollment operations."
+---
+
+## General
+
+Picking a start date is the first step — a family applies and chooses the date they want the whole family to start.
+
+The initial cohort options are:
+
+| Cohort | Dates |
+| --- | --- |
+| Early Start (summer) | June 29, 2026; July 6, 2026; July 13, 2026; July 20, 2026; July 27, 2026 |
+| Fall 2026 | August 18, 2026 |
+
+Summer dates are weekly Mondays; Fall 2026 is a single seasonal start. There can be operational exceptions — for example, a one-off mid-week start to accommodate late laptop shipments — but those are set by staff, not offered to families.
+
+A start date becomes unavailable when:
+
+- **It's too close.** A date within the lead-time cutoff (roughly 10 days out) can no longer be selected.
+- **The summer date is full.** Each summer date holds a capped number of committed students (75). Fall 2026 is uncapped.
+
+Families stay together. Because the system moves whole families rather than splitting siblings, a date can end up slightly over its cap — if a date has 73 committed students and a family of four commits, all four stay on that date.
+
+## Developer notes
+
+Start-date options, the lead-time cutoff, and capacity all live in the launch-window logic (`server/src/lib/enrollment/launch-window.ts`). The rules it enforces:
+
+- Summer dates are the Mondays inside a configured window, plus the single Fall date.
+- A date is selectable only if it's one of the offered options and is more than the lead-time (about 10 days, in Central time) away. The same check is re-applied when the family confirms.
+- Each summer date is capped at 75 committed students; Fall is uncapped.
+
+"Committed" here means **real commitment** — the same rule used everywhere else: a confirmed voucher or a real (non-covered) self-pay payment. See [Payments](/operations/enrollment/payments) for the exact definition.
+
+**Rollover** is handled by the `reconcile-start-date-capacity` Inngest function (scheduled cron in production). It does two things:
+
+- Moves whole families off a summer date that's over capacity, onto the next summer date (or Fall for the last one), prioritizing families by commitment.
+- Moves families who, close to their start date, still have no committed student.
+
+Each move is recorded as a family activity event rather than firing another Inngest event. Two related behaviors from the operational plan are **not built yet**: sending a reminder and then moving a family with missing info, and moving a family that never confirms its laptop address.
+
+Staff can set an **exceptional start date** through an admin procedure (`applications.updateStartDate`) that bypasses the parent-facing lead-time, offered-option, and capacity checks. Treat admin-set dates as internal exceptions.

@@ -1,0 +1,51 @@
+---
+title: "Enrollment payments"
+sidebarTitle: "Payments"
+description: "How voucher and self-pay payment confirmation work, and how Odyssey voucher data is synced in."
+---
+
+## General
+
+To be eligible to start, a family needs confirmed payment. There are two ways a family pays, and they confirm differently.
+
+### Voucher (TEFA) families
+
+Voucher families confirm tuition through Odyssey, an external state portal that holds their voucher information — they select Texas Sports Academy, we enter the tuition, and they confirm it to release the funds. See [TEFA Voucher](/funding/tefa-voucher) for the full family-facing process.
+
+On our side, that Odyssey data has to make it into our system. Palmer runs a backfill script (informally *Backfill Odyssey Selected*) that takes the latest Odyssey export, matches each row to the family and students we already have, and updates our database so it reflects the voucher portal. For a voucher family, this Odyssey confirmation **is** their payment being confirmed — there's no separate charge on our side.
+
+### Self-pay families
+
+Self-pay families pay through our portal. Paying records a payment type (their plan) and a paid date, and that's their confirmation. If financial aid, discounts, or a voucher fully cover a self-pay family's tuition, they confirm a $0 balance in the portal instead of paying. For tuition amounts, payment plans, and what's included, see [Self-Pay](/funding/self-pay).
+
+Confirmed payment matters because it controls operational readiness — it's what lets a student count toward a start date's capacity and move toward rostering.
+
+## Developer notes
+
+### What counts as committed
+
+The single source of truth is `hasRealCommitment` (`server/src/lib/enrollment/commitment.ts`): a student has real commitment if they are **odyssey-confirmed**, or have a **paid date with a non-`covered` plan type**.
+
+- **Voucher families** are gated on `odyssey_status = 'confirmed'`. The Odyssey backfill sets that status — it does **not** set `paid_at`. For voucher families, `paid_at` is not the gate.
+- **Self-pay families** are gated on `paid_at` plus a real plan type (`annual`, `quarterly`, `monthly`).
+- The `$0` **covered** case sets a `covered` plan type, which is **deliberately excluded** from commitment — a covered `paid_at` does not count on its own.
+
+### Self-pay payment paths
+
+- **Real balance:** the checkout session is created by `home.createEnrollmentCheckout`, and the Stripe webhook (`server/src/webhooks/stripe.ts`) records the paid date and plan type when checkout (or a subscription invoice) succeeds.
+- **`$0` covered:** `home.confirmZeroBalance`, invoked from the self-pay checkout page, verifies the student's net balance (tuition minus discounts, financial aid, and voucher) is zero, then marks them with a `covered` plan type and parks them in `paid_not_enrolled`. This is part of the self-pay checkout flow — it is **not** the TEFA path, and covered students still rely on Odyssey confirmation to count as committed.
+
+Both paths emit the enrollment-payment event that triggers `auto-enroll`; the daily promote cron is the backstop. See [Readiness and rostering](/operations/enrollment/readiness-and-rostering).
+
+### Odyssey sync mechanics
+
+Two scripts, run operationally by Palmer (not scheduled jobs):
+
+- A **read-only matcher** compares the Odyssey export against our records and flags inconsistencies — mismatched phone numbers, name variants, date-of-birth conflicts, multiple candidates, and so on — so they can be resolved before the backfill writes anything.
+- The **backfill** then updates our records from the export. It currently writes the **family-level** `odyssey_status` (a family is `confirmed` only when all its students are); writing the student-level status is a known TODO. When sheet spelling or phone numbers don't match cleanly, the backfill can create a duplicate `lead` student row alongside the real one — a recurring consistency issue (see [Data model notes](/operations/enrollment/data-model-notes)).
+
+`odyssey_status` is a free-text field with these values: `confirmed`, `awaiting_confirmation`, `tuition_needed`, `verification_pending`, or none (absent from the latest export). The Odyssey "Student ID" is an external UUID, distinct from our internal student id. The backfill never marks a student `paid_at`-paid or `enrolled` — but for voucher families, the Odyssey status it writes **is** the payment-confirmation signal.
+
+<Note>
+  Keep the terms `paid_not_enrolled`, `enrolled`, `odyssey_status`, and `covered` precise. They are not interchangeable.
+</Note>

@@ -1,0 +1,38 @@
+---
+title: "Enrollment operations overview"
+sidebarTitle: "Overview"
+description: "Internal overview of the Texas Sports Academy Online enrollment operations flow."
+---
+
+<Warning>
+  This is an internal operations page. It includes process notes and known gaps that should not be copied into parent-facing documentation.
+</Warning>
+
+## General
+
+Enrollment moves a family from application through to a rostered student with a laptop on the way and onboarding materials in hand. At a high level:
+
+<Steps>
+  <Step title="Apply and pick a start date">
+    A family applies in the portal and picks the start date they want for the whole family. Which dates are available, and why some are blocked, is covered in [Start dates](/operations/enrollment/start-dates).
+  </Step>
+  <Step title="Confirm eligibility to start">
+    To start on the chosen date, the family has to be eligible: a start date is selected **and** payment is confirmed. Payment is confirmed either through a voucher or through self-pay. See [Payments](/operations/enrollment/payments).
+  </Step>
+  <Step title="Clear blockers (missing info and laptop address)">
+    Before we can enroll a student or ship a laptop, we collect anything still missing — information the SIS needs (student name, date of birth, grade, parent email) and a confirmed laptop delivery address. We reach out to the family, ideally in one message, and ask them to complete it by a cutoff before their start date. If they don't, the family is moved to the next start date. See [Readiness and rostering](/operations/enrollment/readiness-and-rostering) and [Communications](/operations/enrollment/communications).
+  </Step>
+  <Step title="Ship the laptop">
+    Once payment, information, and the delivery address are confirmed, the laptop is shipped to the family before their start date. See [Laptops](/operations/enrollment/laptops).
+  </Step>
+  <Step title="Roster and enroll">
+    Around a week before the start date — concurrent with shipping — ready students are rostered in the SIS, which enrolls them in Timeback. We then verify the Timeback account and link the parent. See [Readiness and rostering](/operations/enrollment/readiness-and-rostering).
+  </Step>
+  <Step title="Onboarding">
+    After the student is enrolled and the laptop is on the way, we send parents their onboarding materials and instructions. Further follow-ups may come later. See [Communications](/operations/enrollment/communications).
+  </Step>
+</Steps>
+
+## Developer notes
+
+The flow is driven by a few Inngest functions, each documented on the page for its step: confirming payment emits an enrollment event; `promote-paid-not-enrolled-students` (daily cron) normalizes committed students and re-fires roster events for those whose window is open; `auto-enroll` rosters a student to the SIS and flips them to `enrolled`; `verify-timeback-and-notify` (runs every 3 hours) confirms the Timeback account and sends the parent dashboard email; and `reconcile-start-date-capacity` handles start-date capacity and rollover. Start at the linked page for the step you care about — this page is just the map.

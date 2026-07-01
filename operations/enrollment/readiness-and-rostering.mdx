@@ -1,0 +1,47 @@
+---
+title: "Readiness and rostering"
+sidebarTitle: "Readiness & Rostering"
+description: "How we clear enrollment blockers and roster students into the SIS and Timeback."
+---
+
+## General
+
+Once a family has a start date and confirmed payment, they're eligible to start — but eligibility is not the same as being ready to enroll. Before we can roster a student or ship a laptop, we have to clear any blockers:
+
+- **Missing information the SIS needs** — student first and last name, date of birth, grade, and the parent's email.
+- **An unconfirmed laptop delivery address.**
+
+We reach out to the family — ideally in one message — and ask them to fill in whatever's missing by a cutoff before their start date. If they don't respond in time, the family is moved to the next start date.
+
+Once a student is ready, the rest runs automatically, starting about a week before their start date:
+
+- **Roster to the SIS.** We add the student *and* their parent to the SIS, link them there, and mark the student enrolled. "Enrolled" always means actually rostered.
+- **Timeback provisioning (outside our control).** The Timeback team's own sync pulls newly-rostered students from the SIS — students roughly hourly, parents roughly daily — and provisions each student a Google Workspace email and a Timeback account. We deliberately don't create students in Timeback ourselves, since that provisioning (Workspace accounts, course placements) is theirs to do.
+- **Verify and notify.** We periodically check that Timeback has created the student account, make sure the parent account exists and is linked — creating them ourselves if Timeback's sync is lagging — record the account IDs on our side, and send the parent their dashboard sign-in email (one per family).
+
+## Developer notes
+
+### Readiness vs. data completeness
+
+These are two separate checks:
+
+- **Roster readiness** (`evaluateRosterReadiness` in `server/src/lib/enrollment/roster-readiness.ts`) decides whether a student is in the window to be enrolled: they need real commitment, a concrete start date, a confirmed laptop address, and an open roster window (about 7 days before start).
+- **Data completeness** is checked later, at roster time, inside `auto-enroll`. A missing parent email or missing student name / date of birth / grade holds the student in `paid_not_enrolled` so the next cron run can retry. Parent email is the only required parent field; other parent details are sent if present but don't block.
+
+### The roster pipeline
+
+Three functions split the work by concern and cadence:
+
+- **`promote-paid-not-enrolled-students`** (daily cron) is the batch safety net. Phase 1 moves any committed student into `paid_not_enrolled`; Phase 2, for those whose roster window is open, re-fires the per-student enrollment event. It never touches the SIS — it only normalizes status and nudges.
+- **`auto-enroll`** (per-student; triggered by that event, and also directly when payment is confirmed) is the **only** writer to the SIS. Its `completeRosterStudent` call creates the parent in the SIS, creates the student, and links them, stores the SIS IDs, and — **only on a successful roster** — flips the student to `enrolled` (cascading the application once all siblings are enrolled). It's serialized per student and idempotent, so the payment event, an admin re-trigger, and the daily cron can't double-roster. It runs entirely before Timeback, and on success it also pushes updated enrollment counts to an external system (Klair) and emits an internal XP event.
+- **`verify-timeback-and-notify`** (cron, every 3 hours in production) watches Timeback, which provisions on its own clock. It checks the student account exists in Timeback (by the deterministic `<first>.<last>@2hourlearning.com` email), ensures the parent exists and is linked — creating them in OneRoster as a fallback if Timeback's sync is lagging, but only once the student exists — writes the OneRoster IDs back to our records, and sends one dashboard sign-in email per family.
+
+**Parent, two systems:** `auto-enroll` always creates the parent in the **SIS** at roster time. Timeback is expected to sync that parent into **OneRoster** on its own; the verify cron creates the OneRoster parent only as a fallback when that sync lags.
+
+**Why it's split:** SIS rostering needs to be a single serialized, idempotent writer (no double-roster); status promotion is a cheap daily batch that just retries and nudges; and Timeback provisioning is asynchronous and out of our control, so emailing at roster time would send parents to an empty dashboard — the email waits until the Timeback student + parent + link are confirmed.
+
+<Note>
+  The dashboard email is family-level — siblings in the same household get one email, not one per student. The send is claimed atomically so concurrent runs can't double-send.
+</Note>
+
+`enrolled` is a SIS-success status, not a date-based one — it always implies the student was actually rostered.

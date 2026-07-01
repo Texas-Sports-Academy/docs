@@ -1,0 +1,54 @@
+---
+title: "Enrollment data model notes"
+sidebarTitle: "Data Model Notes"
+description: "Reference notes for enrollment statuses, columns, tables, and common interpretation mistakes."
+---
+
+<Warning>
+  This page is a reference appendix. Start with the workflow pages before using these notes.
+</Warning>
+
+## General
+
+Enrollment pulls data from several systems — the TSA portal/backend, Odyssey voucher data, Stripe payments, the SIS roster, Timeback accounts, and laptop fulfillment. Most mistakes come from treating one system's status as if it were the whole enrollment state. Timeback **is** the SIS here — there are no generic external-id columns; the Timeback/OneRoster IDs are the linkage. Schema definitions live under `server/src/db/schemas/`.
+
+## Developer notes
+
+### Statuses and key columns
+
+The only enrollment status enum is `student_status`: `lead`, `applied`, `paid_not_enrolled`, `enrolled`, `graduated`, `withdrawn`, `removed`. There is no separate application-student status enum.
+
+| Field | Meaning |
+| --- | --- |
+| `paid_not_enrolled` | Real commitment exists, but SIS rostering isn't complete |
+| `enrolled` | SIS rostering succeeded — not "paid" and not "start date reached" |
+| `paid_at` | Self-pay payment evidence (on `student_leads`) |
+| `payment_plan_type` | `annual` / `quarterly` / `monthly` / `covered`; `covered` is a $0 voucher-style confirmation that does **not** count as commitment |
+| `odyssey_status` | Voucher state, free text: `confirmed` / `awaiting_confirmation` / `tuition_needed` / `verification_pending` / none |
+
+Timeback/SIS identifiers are stored on the student record (OneRoster id, Timeback email, SIS student id, SIS enrollment id, plus a rostered flag), on the family record (OneRoster id), and mirrored onto the application. They're written by `verify-timeback-and-notify` on SIS success.
+
+### Core tables
+
+| Area | Tables |
+| --- | --- |
+| Families and parents | `family_leads`, `parent_leads` |
+| Students | `student_leads` |
+| Applications | `applications`, `application_students` |
+| Activity and reminders | `family_activity_events` |
+| Laptop fulfillment | `laptops` (also the per-student assignment record), `laptop_shipments`, laptop inventory tables |
+
+### Interpretation rules
+
+- The Odyssey "Student ID" is the external Odyssey UUID, not our internal student id.
+- A `covered` student still needs Odyssey confirmation to count as committed.
+- `enrolled` means SIS success, not "the student reached their start date."
+- Start-date capacity counts **committed** students, not everyone who clicked a date.
+- The parent dashboard email is family-level — one per household, not one per student.
+
+### Known consistency issues
+
+- The Odyssey backfill currently writes the family-level voucher status only; the student-level write is a known TODO.
+- When sheet spelling or phone numbers don't match cleanly, the backfill can create a duplicate `lead` student row alongside the real one.
+- The laptop confirmation flow is overloaded — it both saves the address and acts as a roster-readiness trigger. A repeated confirmation reuses the same activity event, so its presence alone doesn't prove a second confirmation happened.
+- Staff can set start dates manually with no validation; treat those as internal exceptions.

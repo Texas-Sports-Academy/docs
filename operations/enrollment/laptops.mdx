@@ -1,0 +1,31 @@
+---
+title: "Laptop fulfillment"
+sidebarTitle: "Laptops"
+description: "How laptop address confirmation, provisioning, shipping, and tracking work."
+---
+
+## General
+
+Every enrolled student needs a laptop before they start. Getting the right laptop to the right place involves **two separate address confirmations**:
+
+1. **Initial delivery address.** During onboarding, the family fills in their laptop delivery address in the portal. This records their delivery address so we know where the laptop should go.
+2. **Pre-ship reconfirmation.** Right before we ship, we text the family a link to the laptop confirmation page and ask them to reconfirm the delivery address (and that they'll be available to receive it). We don't ship until they've reconfirmed — a stale initial address isn't enough to trigger a send.
+
+The confirmation page shows the family the address we think is right, lets them pick between two conflicting addresses if we have both on file, and always lets them edit it or enter a new one. The reconfirmation request is ideally bundled into the same outreach that collects any missing enrollment info — see [Communications](/operations/enrollment/communications).
+
+Getting laptops out the door is still partly manual: provisioning devices, linking them to students, labeling each laptop, packaging, and dropping off shipments are hands-on steps.
+
+For the family-facing laptop policy — the MacBook is provided for educational use and must be returned on withdrawal — see [Self-Pay](/funding/self-pay).
+
+## Developer notes
+
+Both confirmations go through the same mutation, `home.confirmLaptop`, distinguished by a `reconfirm` flag:
+
+- The **in-app laptop hub** (`/home/laptop`, `HomeLaptop`) is where the initial delivery address is saved. It records/updates the `laptop_confirmed` family activity event — the "saved delivery address" onboarding step, which is also one of the roster-readiness gates (so saving the address is part of what makes a student eligible to roster — see [Readiness and rostering](/operations/enrollment/readiness-and-rostering)). The hub does **not** set the reconfirmation marker.
+- The dedicated **confirm-your-address page** (`/home/laptop/confirm-your-address`, `HomeLaptopConfirmAddress`), which the pre-ship SMS links to, calls `confirmLaptop` with `reconfirm: true`. That stamps a sticky, set-once `reconfirmedAt` marker on the `laptop_shipping_address_confirmed` event. The marker is never cleared, and **its presence is the durable signal staff gate shipping on** — no reconfirmation, no shipment.
+
+Any save through either page also (idempotently) emits the `laptop_shipping_address_confirmed` analytics event and provisions a laptop record per orderable student. The confirmed address is mirrored onto the family profile when the family picks their profile address, or kept on the laptop-delivery metadata when they pick a separate delivery address — so a delivery choice doesn't clobber their home address.
+
+The parent-facing tracker (also at `/home/laptop`) reads the student's laptop record and overlays the latest shipment for that laptop. The "on the way" state is derived from the laptop's **assignment status** (an older delivery-status field is deprecated — don't write to it). Siblings can share a single tracking number, so shipment lookups key on the individual laptop record rather than the number. The relevant tables are the laptop records (which double as the per-student assignment table), the shipments table, and the inventory tables.
+
+The pre-ship reconfirmation SMS is currently a one-off operational batch, not a scheduled job — see [Communications](/operations/enrollment/communications). USPS label automation and webhook-driven tracking aren't built yet.
