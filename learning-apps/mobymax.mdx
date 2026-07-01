@@ -1,5 +1,8 @@
 ---
-title: "mobymax"
+title: "MobyMax"
+sidebarTitle: "MobyMax"
+description: "What MobyMax is, how its per-subject XP works, and the concerns most often raised about it."
+icon: "layer-group"
 ---
 
 ## Subjects & Grades
@@ -20,3 +23,137 @@ title: "mobymax"
 
 - Language: 80% on lessons; 100% on lesson tests
 - Science: 80% accuracy required
+
+<Note>
+  **Scope of this page.** This is the MobyMax entry in the app support library. It covers **what it is**, its **XP rules**, and the **top concerns** — each with resolution steps, a "verify resolved" check, and a ready-to-paste canned response. For the shared playbook framework, severity levels, and the "No XP" triage tree, see the [TimeBack page](/learning-apps/timeback-mdx).
+
+  **Owner:** \[Add owner\] · **Last reviewed:** 2026-07-01
+</Note>
+
+## What is MobyMax?
+
+MobyMax is a **multi-subject adaptive learning platform (K–12)** with 25\+ curriculum modules — Math, Science, Language, Reading, Writing, Phonics, Social Studies, Vocabulary, and Spelling. It finds a student's gaps with adaptive **"Find & Fix"** and assigns targeted skills to close them.
+
+At TSA, MobyMax is used mainly for **Science, Language, and Reading**, often as a **hole-filling** (supplemental) app alongside the core subject apps.
+
+<CardGroup cols={2}>
+  <Card title="Multi-subject & adaptive" icon="shapes">
+    One platform across many subjects; "Find & Fix" targets each student's specific gaps.
+  </Card>
+
+  <Card title="Assignment-based" icon="list-check">
+    Work is delivered as assignments — Skills, Quizzes, and various tests — with per-student completion tracking.
+  </Card>
+</CardGroup>
+
+## Purpose
+
+- Provide **adaptive, gap-filling practice** across multiple subjects — at TSA primarily **Science, Language, and Reading**.
+- Use **"Find & Fix"** to diagnose and assign the specific skills a student is missing.
+- Report per-subject XP and completion into TimeBack.
+
+<Info>
+  MobyMax is a **third-party app** — it reports into TimeBack through the [Bridge](/learning-apps/timeback-mdx) on a ~3-minute poll cycle, so XP lands in about **1–3 minutes**. Its XP amount **depends on the subject and activity**, which is a common source of "the XP seems off" questions.
+</Info>
+
+## XP quick reference
+
+Grounded in TimeBack's per-app XP rules. MobyMax requires **≥80% accuracy** to award XP in every subject.
+
+| App | Accuracy needed | Typical delay | Notes |
+| --- | --- | --- | --- |
+| MobyMax | 80% | 1–3 min (~3 min poll) | **Science:** 13 XP (G3–5), 25 XP (G6–8) · **Language:** 5 XP/lesson \+ 2 XP for a perfect test · **Reading:** 2–13 XP per skill |
+
+<Info>
+  Below 80% accuracy, **no XP posts at all** — the app rule, not a bug. This is the single most common MobyMax ticket (e.g., a completed science module showing 0 XP). _(Source: TimeBack XP rules.)_
+</Info>
+
+## Top concerns
+
+Ranked by support impact. Each is tagged **User education** (resolved by explanation/procedure) or **Product defect** (needs a product-side fix).
+
+| # | Concern | Type | Impact |
+| --- | --- | --- | --- |
+| 1 | No XP on a module when accuracy is below 80% | User education | Medium–High |
+| 2 | XP seems inconsistent (it varies by subject and activity) | User education | Medium |
+
+---
+
+### 1. No XP on a module when accuracy is below 80%
+
+- **Type:** User education
+- **Applications:** MobyMax (all subjects; most often Science)
+- **Symptom / verbatim:** Zoey Hsu — MobyMax **science** module awarded **no XP**.
+- **Root cause:** MobyMax requires **≥80% accuracy** to award XP in every subject. A completed module below 80% earns **0 XP** — the work happened, but the accuracy bar wasn't met. This is the app rule, not a malfunction (see the [XP quick reference](#xp-quick-reference)). **Resolution steps**
+
+<Steps>
+  <Step title="Confirm the work and subject">
+    Verify the student completed a MobyMax module and note the subject (Science, Language, or Reading).
+  </Step>
+  <Step title="Check the accuracy">
+    MobyMax requires **≥80% accuracy** in every subject. Below that, **0 XP** posts — the work happened, but the accuracy bar wasn't met.
+  </Step>
+  <Step title="Explain and encourage a retry">
+    This is the app rule, not a malfunction. Reaching 80%\+ on a retry posts the XP (within the 1–3 minute delay).
+  </Step>
+  <Step title="Rule out a real gap">
+    If accuracy was ≥80% and XP is still missing after the ~3-minute poll, treat it as a sync issue (see the [TimeBack "No XP" triage](/learning-apps/timeback-mdx)).
+  </Step>
+</Steps>
+
+**Verify resolved:** XP posts within 1–3 minutes once the student reaches 80%\+, or the parent understands the accuracy rule.
+
+**Canned response**
+
+```text
+Hi [Parent name], good news — [Student]'s work went through, nothing's broken!
+MobyMax only awards XP when accuracy is 80% or higher, in every subject. This
+[subject] module came in below that, so it didn't add XP this time. If [Student]
+retries and reaches 80%+, the XP will post within a few minutes. Happy to walk
+through the tricky skill with you if that would help!
+```
+
+**Metadata:** Reported by Zoey Hsu (science) · Severity **Medium–High**
+
+### 2. XP seems inconsistent (varies by subject and activity)
+
+- **Type:** User education
+- **Applications:** MobyMax (Science, Language, Reading)
+- **Symptom / verbatim:** _Anticipated from MobyMax's XP rules_ — "the same amount of work earned very different XP."
+- **Root cause:** MobyMax XP **depends on the subject and activity**: Science is 13 XP (G3–5) or 25 XP (G6–8) per lesson, Language is 5 XP per lesson (plus 2 XP for a perfect test), and Reading is 2–13 XP per skill. Different modules earning different XP is expected, not a bug. **Resolution steps**
+
+<Steps>
+  <Step title="Identify the subject and activity">
+    Different subjects and activities award different XP — check what the student actually worked on.
+  </Step>
+  <Step title="Explain the amounts">
+    Science is 13 XP (G3–5) or 25 XP (G6–8) per lesson; Language is 5 XP per lesson (plus 2 XP for a perfect test); Reading is 2–13 XP per skill.
+  </Step>
+  <Step title="Normalize the variation">
+    Different modules earning different XP is expected — the number reflects the subject and activity, not a bug.
+  </Step>
+  <Step title="Reassure">
+    Earned XP is recorded on the account; nothing is lost.
+  </Step>
+</Steps>
+
+**Verify resolved:** The XP matches the subject/activity worked on, and the parent understands it varies by module.
+
+**Canned response**
+
+```text
+Hi [Parent name], great question! MobyMax gives different XP depending on the
+subject and activity — for example, a science lesson is worth more than a single
+reading skill, and a perfect language test earns a small bonus. So the same amount
+of time can add different XP depending on what [Student] worked on. It's all
+expected, and their earned XP is safely recorded. Let me know if you'd like me to
+check a specific module!
+```
+
+**Metadata:** Grounded in XP rules; watch for tickets · Severity **Medium**
+
+---
+
+<Tip>
+  **Confirm before publishing:** the per-subject XP amounts (especially Reading's 2–13 range) with an SME, and how students actually sign in to MobyMax (the Bridge docs only cover teacher/roster auth, not the student login path).
+</Tip>
