@@ -1,15 +1,292 @@
 ---
-title: "Freckle"
+title: "Freckle, Lalilo & Renaissance"
+sidebarTitle: "Freckle"
+description: "What the Renaissance family of learning apps is, and the concerns most often raised about them."
+icon: "book-open-reader"
 ---
 
-## Subjects & Grades
+<Note>
+  **Scope of this page.** This is the Freckle / Lalilo / Renaissance entry in the app support library. This pass covers **what these apps are** and the **top concerns** raised about them. Resolution steps, "verify resolved" checks, and canned responses are added in the next pass. For the shared playbook framework, severity levels, and the "No XP" triage tree, see the [TimeBack page](/learning/learning-apps/timeback).
 
-- **Language (Hole Filling)** — Grades 3–10
+  **Owner:** \[Add owner\] · **Last reviewed:** 2026-07-01
+</Note>
 
-## XP Rule
+## What are Freckle, Lalilo & Renaissance?
 
-- (no content found)
+These are **three parts of one system** — all built by **Renaissance** and sharing a single sign-in. That shared identity layer is the reason logins feel fragmented (see [Concern 1](#1-fragmented-and-repeated-login)).
 
-## Accuracy Threshold
+<CardGroup cols={3}>
+  <Card title="Freckle" icon="pencil">
+    Adaptive **Math and ELA** practice. Students get right-leveled questions; teachers assign targeted skills and monitor progress.
+  </Card>
 
-- (no content found)
+  <Card title="Lalilo" icon="book-open">
+    Foundational **literacy for K–2** — adaptive reading exercises. Supports at-home practice via a per-student **home code**.
+  </Card>
+
+  <Card title="Renaissance" icon="id-card">
+    The **identity and rostering** backbone (SIS). Manages students, classes, and enrollments; Freckle and Lalilo both authenticate through it.
+  </Card>
+</CardGroup>
+
+## Purpose
+
+- **Freckle** delivers adaptive Math and ELA practice, with teacher-assigned targeted-skills practice.
+- **Lalilo** delivers early-reading practice for K–2, usable at home via a home code.
+- **Renaissance** is the shared account/roster system that both apps sign in through — so a student's Freckle and Lalilo access depend on their Renaissance roster and enrollment.
+
+<Info>
+  Because both apps sit behind the **same Renaissance login** and pull assignments from the **teacher/roster side**, most tickets here are about **access** (signing in, finding the app, assignments not appearing) rather than the learning content itself. Assignments visible on the home page but missing in the app is usually a roster/assignment-sync issue, not a broken app.
+</Info>
+
+## XP quick reference
+
+Grounded in TimeBack's per-app XP rules. Check the accuracy cutoff and delay before assuming a defect.
+
+| App | Accuracy needed | Typical delay | Notes |
+| --- | --- | --- | --- |
+| Freckle | 80% | 2–5 min | ELA: XP per correct question · Math: K–2 = 5 XP, 3–5 = 7 XP, 6\+ = 10 XP |
+| Lalilo | 80% | 1–3 min | 3 XP per lesson part · K–2 · lessons span multiple days (XP posts when marked complete) |
+
+<Info>
+  Below 80% accuracy, **no XP posts at all** — this is the app rule, not a bug, and is a common source of "my child did work but got no XP" tickets. _(Source: TimeBack XP rules.)_
+</Info>
+
+## Top concerns
+
+Ranked by support impact. Each is tagged **User education** (resolved by explanation/procedure) or **Product defect** (needs a product-side fix).
+
+| # | Concern | Type | Impact |
+| --- | --- | --- | --- |
+| 1 | Fragmented and repeated login | User education | High — most common in this family |
+| 2 | Assignments don't appear in the app (visible on home page) | Product defect | Medium–High |
+| 3 | Lalilo loads indefinitely | Product defect | Medium |
+| 4 | Lalilo asks for a 6-digit "home code" | User education | Medium |
+| 5 | No XP when reading/vocabulary accuracy is below 80% | User education | Medium |
+| 6 | Freckle app won't load without a backend fix | Product defect | Low–Medium |
+
+---
+
+### 1. Fragmented and repeated login
+
+- **Type:** User education
+- **Applications:** Freckle, Lalilo, Renaissance (shared sign-in)
+- **Symptom / verbatim:**
+  - Nuttapone (parent of Napatt) — must log in to Language on **each visit**; assignments do not appear afterward.
+  - General password / sign-in difficulty across the family (Alexandria, Breanna, Cornelius).
+- **Root cause:** Freckle and Lalilo both authenticate through **Renaissance**, and the path into the app is multi-step, so families re-navigate it every session. The known working path is: _I'm a Student → email → `iloveschool` → Freckle → "A. Guide" → "From my teacher."_ **Resolution steps**
+
+<Steps>
+  <Step title="Open the student sign-in">
+    From the student portal, choose **"I'm a Student."**
+  </Step>
+  <Step title="Enter credentials">
+    Enter the student's **email**, then the password **`iloveschool`**.
+  </Step>
+  <Step title="Open Freckle">
+    Select **Freckle** from the app list.
+  </Step>
+  <Step title="Navigate to assigned work">
+    Choose **"A. Guide" → "From my teacher"** to reach the student's assigned skills.
+  </Step>
+  <Step title="Set expectations">
+    This multi-step path is the current way in, so families re-enter it each visit — bookmarking it or saving the credentials helps.
+  </Step>
+</Steps>
+
+**Verify resolved:** The student lands on their assigned Freckle work under "From my teacher."
+
+**Canned response**
+
+```text
+Hi [Parent name], happy to help [Student] get into Freckle! Here's the path that
+works: from the student portal choose "I'm a Student," enter [Student]'s email
+and the password iloveschool, then pick Freckle → "A. Guide" → "From my teacher"
+to see their assigned work. It's a few steps each time for now, so it can help to
+bookmark it. Let me know if any step doesn't look the same on your end!
+```
+
+**Metadata:** Most common concern in this family · Severity **High**
+
+### 2. Assignments don't appear in the app
+
+- **Type:** Product defect (to confirm)
+- **Applications:** Freckle (assignment sync)
+- **Symptom / verbatim:**
+  - Parker Pederson `[6/29]` — the home page shows assignments, but the Freckle app does not.
+  - Nuttapone — assignments do not appear after logging in.
+- **Root cause:** Suspected gap between the assignment/roster side and what the app renders. Freckle's own roster endpoints note that a class list "may omit students with no recorded sessions yet," pointing to a roster/session-sync dependency. **Resolution steps**
+
+<Steps>
+  <Step title="Confirm they're in the right place">
+    Make sure the student navigated to **"A. Guide" → "From my teacher"** — assigned work lives there, separate from adaptive practice.
+  </Step>
+  <Step title="Force a refresh">
+    Have the student log out and back in to pull the latest roster and assignments.
+  </Step>
+  <Step title="Check the subject">
+    Confirm you're looking at the right subject (Freckle **Math** vs **ELA**) — assignments are per subject.
+  </Step>
+  <Step title="Fall back to practice">
+    If assignments show on the home page but still not in the app after a refresh, note it as a roster-sync issue; the student can continue with adaptive practice meanwhile.
+  </Step>
+</Steps>
+
+**Verify resolved:** Assigned skills appear under "From my teacher," or the student is productively practicing while the sync is looked into.
+
+**Canned response**
+
+```text
+Hi [Parent name], thanks for flagging this! First, once [Student] is in Freckle,
+make sure they go to "A. Guide" → "From my teacher" — that's where assigned work
+lives (adaptive practice sits elsewhere). If it's still empty there, could you
+have [Student] log out and back in to refresh? That usually pulls in the latest
+assignments. In the meantime they can keep practicing in Freckle, and I'll look
+into the sync if it persists.
+```
+
+**Metadata:** Reported around 6/29 · Severity **Medium–High**
+
+### 3. Lalilo loads indefinitely
+
+- **Type:** Product defect
+- **Applications:** Lalilo
+- **Symptom / verbatim:** Rylie Pederson `[6/29]` — Lalilo loaded indefinitely; the student was moved to Freckle Grade 3 as a workaround.
+- **Root cause:** Lalilo failed to load; the interim workaround was to route the student to Freckle instead.
+
+**Resolution steps**
+
+<Steps>
+  <Step title="Reload Lalilo">
+    Refresh or hard-reload the page; if possible, try a different browser or clear the cache.
+  </Step>
+  <Step title="Confirm the grade">
+    Lalilo is **K–2 only**. If the student is older, Freckle at their grade level is the right app.
+  </Step>
+  <Step title="Route to Freckle as a fallback">
+    If Lalilo still won't load, direct the student to **Freckle** at their grade level so they can keep working (as was done for Rylie → Freckle Grade 3).
+  </Step>
+</Steps>
+
+**Verify resolved:** Lalilo loads, or the student is productively working in Freckle.
+
+**Canned response**
+
+```text
+Hi [Parent name], sorry Lalilo is stuck loading! A couple of quick things to try:
+refresh the page (or do a hard reload), and if you can, open it in a different
+browser. Lalilo is built for grades K–2, so if [Student] is older, Freckle at
+their grade level is the better fit. If it still won't load, [Student] can work in
+Freckle in the meantime and I'll keep looking into the Lalilo issue.
+```
+
+**Metadata:** Isolated `[6/29]` · Severity **Medium**
+
+### 4. Lalilo asks for a 6-digit "home code"
+
+- **Type:** User education
+- **Applications:** Lalilo (home practice)
+- **Symptom / verbatim:** Howie Hsu `[6/29]` — Lalilo requested a 6-digit "home code."
+- **Root cause:** Lalilo uses a **per-student home code** for at-home practice; the family didn't have it on hand. Home codes are issued per class/student and can be looked up, so this is retrievable rather than a defect.
+
+**Resolution steps**
+
+<Steps>
+  <Step title="Explain what the code is">
+    The 6-digit code is the student's **Lalilo home practice code**, required to sign in to Lalilo from home.
+  </Step>
+  <Step title="Look up the code">
+    Find the student's **class**, then retrieve the **home practice codes** for that class to get the student's code. (A teacher or admin can pull this.)
+  </Step>
+  <Step title="Share and enter it">
+    Provide the code to the family and have the student enter it on the Lalilo home screen.
+  </Step>
+</Steps>
+
+**Verify resolved:** The student signs into Lalilo home practice with the code.
+
+**Canned response**
+
+```text
+Hi [Parent name], great question! The 6-digit code Lalilo is asking for is
+[Student]'s home practice code — it lets them sign in to Lalilo from home.
+[Student]'s code is [home code]. Enter that on the Lalilo home screen and they'll
+be all set. Let me know if it doesn't take and I'll double-check it!
+```
+
+**Metadata:** Isolated `[6/29]` · Severity **Medium**
+
+### 5. No XP when reading/vocabulary accuracy is below 80%
+
+- **Type:** User education
+- **Applications:** Freckle (ELA / reading)
+- **Symptom / verbatim:** Howie Hsu — substantial reading/vocabulary work returned no XP (accuracy at 60%).
+- **Root cause:** Freckle requires **≥80% accuracy** to award XP. At 60%, no XP posts — the app rule, not a malfunction (see the [XP quick reference](#xp-quick-reference)). **Resolution steps**
+
+<Steps>
+  <Step title="Confirm the work completed">
+    Verify the student finished the Freckle activity.
+  </Step>
+  <Step title="Check accuracy">
+    Freckle awards XP only at **≥80% accuracy**. Below that (e.g., 60%), no XP posts — this is the app rule, not a bug.
+  </Step>
+  <Step title="Encourage a retry">
+    Reaching 80%\+ on a retry will post XP (within the 2–5 minute delay window).
+  </Step>
+  <Step title="Rule out a real gap">
+    If accuracy was ≥80% and XP is still missing after the delay, treat it as a sync issue.
+  </Step>
+</Steps>
+
+**Verify resolved:** The parent understands the accuracy rule, or XP posts once the student reaches 80%\+.
+
+**Canned response**
+
+```text
+Hi [Parent name], good news — [Student]'s work did go through, nothing is broken!
+Freckle only awards XP when accuracy is 80% or higher, and this session came in
+around [X]%, so it didn't add XP this time. If [Student] retries and reaches 80%+,
+the XP will post (usually within a few minutes). Happy to walk through the skill
+with you if it's giving [Student] trouble!
+```
+
+**Metadata:** Recurring pattern across apps · Severity **Medium**
+
+### 6. Freckle app won't load without a backend fix
+
+- **Type:** Product defect
+- **Applications:** Freckle (language)
+- **Symptom / verbatim:** Ilyas Ali — the Freckle language app required a backend fix to work.
+- **Root cause:** An account/backend issue prevented the app from loading until corrected on the server side. **Resolution steps**
+
+<Steps>
+  <Step title="Rule out login and browser issues">
+    Re-run the login path (I'm a Student → email → `iloveschool` → Freckle) and try a different browser.
+  </Step>
+  <Step title="Check the account is active">
+    Freckle access depends on an active **Renaissance** roster/enrollment — confirm the student's account is set up.
+  </Step>
+  <Step title="Flag for a backend fix">
+    If it still won't load, this is an account/backend issue that needs a server-side correction — capture the student and the error so it can be fixed.
+  </Step>
+</Steps>
+
+**Verify resolved:** The app loads after the account/backend correction.
+
+**Canned response**
+
+```text
+Hi [Parent name], sorry Freckle wouldn't load for [Student]. Let's rule out the
+basics first: try the login path again (I'm a Student → email → iloveschool →
+Freckle) and a different browser. If it still won't open, this is usually an
+account issue on our end that we can correct — I'm looking into [Student]'s
+account now and will follow up as soon as it's fixed.
+```
+
+**Metadata:** Isolated · Severity **Low–Medium**
+
+---
+
+<Tip>
+  **Confirm before publishing:** the exact login path (#1) and the home-code lookup steps (#4) against a live account; whether #2 (assignments) and #6 (backend load) are still open defects; and the `[home code]` / `[X]%` placeholders in the canned responses.
+</Tip>
